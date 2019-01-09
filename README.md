@@ -8,7 +8,7 @@ const goCardlessApi = new GoCardlessApi("accessToken", sandbox?:boolean) // sand
 
 ### Apis:
 
-#### Bank Account
+### Bank Account
 
 ```
 goCardlessApi.bankAccount
@@ -141,7 +141,7 @@ goCardlessApi.bankAccount.disable(id: string): Promise<{
 }>
 ```
 
-Bank Account For Customer Id
+bank account for customer id
 
 returns an array of bank accounts for a customer by the given customer id.
 
