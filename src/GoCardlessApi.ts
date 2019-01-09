@@ -75,7 +75,7 @@ export class GoCardlessApi {
   getBaseUrl() {
     return this.sandbox ? goCardlessTestUrl : goCardlessLiveUrl;
   }
-  request(
+  async request(
     path: string,
     method: "GET" | "POST" | "PUT" = "GET",
     data?: { [key: string]: any }

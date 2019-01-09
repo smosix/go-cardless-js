@@ -10,16 +10,19 @@ const goCardlessApi = new GoCardlessApi("accessToken", sandbox?:boolean)
 
 ```
 
-### Error Format
+### Error format example
 
 ```javascript
+
 {
-  "type": "500 Server",
-  "data": {
-    "message": string, // gocardless error message
-    "stack": string[]
-  },
-  "code": number
+  "type": "go cardless validation error",
+  "data": [
+    {
+      "field": "amount",
+      "message": "must be greater than 0",
+      "request_pointer": "/subscriptions/amount"
+    }
+  ]
 }
 ```
 
