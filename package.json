@@ -1,0 +1,18 @@
+{
+  "name": "go-cardless-js",
+  "version": "1.0.1",
+  "main": "build/index.js",
+  "author": "CD2",
+  "license": "MIT",
+  "typings": "./build",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CD2/co-cardless-js"
+  },
+  "dependencies": {
+    "node-fetch": "^2.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.2.2"
+  }
+}
