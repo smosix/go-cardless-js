@@ -11,8 +11,8 @@ export enum errors {
 export class GoCardlessError extends Error {
   type: errors;
   data: any;
-  constructor(type: errors, data?: any) {
-    super(type + (data ? "-" + JSON.stringify(data) : ""));
+  constructor(type: errors, data: any = {}) {
+    super(JSON.stringify({ message: type, data: data }));
     this.type = type;
     this.data = data;
     Object.setPrototypeOf(this, GoCardlessError.prototype);
