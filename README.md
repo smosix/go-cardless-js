@@ -141,7 +141,9 @@ goCardlessApi.bankAccount.disable(id: string): Promise<{
 }>
 ```
 
-bankAccountForCustomerId
+Bank Account For Customer Id
+
+returns an array of bank accounts for a customer by the given customer id.
 
 ```javascript
 goCardlessApi.bankAccount.bankAccountForCustomerId(customerId: string): Promise<{
