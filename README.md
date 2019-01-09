@@ -1,9 +1,13 @@
 # Go Cardless Api JS Wrapper
 
+GoCardless Api Documentation: https://developer.gocardless.com/api-reference/#api-usage-making-requests
+
 ## Getting started
 
 ```javascript
-const goCardlessApi = new GoCardlessApi("accessToken", sandbox?:boolean) // sandbox is default TRUE
+const goCardlessApi = new GoCardlessApi("accessToken", sandbox?:boolean)
+// sandbox is default TRUE
+
 ```
 
 ### Apis:
