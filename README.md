@@ -3,7 +3,7 @@
 ## Getting started
 
 ```javascript
-const goCardlessApi = new GoCardlessApi("accessToken", sandbox?:boolean)
+const goCardlessApi = new GoCardlessApi("accessToken", sandbox?:boolean) // sandbox is default TRUE
 ```
 
 ### Apis:
