@@ -16,7 +16,7 @@ goCardlessApi.bankAccount
 
 #### Actions
 
-index
+##### index
 
 ```javascript
 goCardlessApi.bankAccount.index({ limit: number }): Promise<{
@@ -39,7 +39,7 @@ goCardlessApi.bankAccount.index({ limit: number }): Promise<{
 }>
 ```
 
-create
+##### create
 
 ```javascript
 goCardlessApi.bankAccount.create({
@@ -68,7 +68,7 @@ goCardlessApi.bankAccount.create({
 }>
 ```
 
-update
+##### update
 
 ```javascript
 goCardlessApi.bankAccount.update(id: string, {
@@ -95,7 +95,7 @@ goCardlessApi.bankAccount.update(id: string, {
 }>
 ```
 
-find
+##### find
 
 ```javascript
 goCardlessApi.bankAccount.find(id: string): Promise<{
@@ -118,7 +118,7 @@ goCardlessApi.bankAccount.find(id: string): Promise<{
 }>
 ```
 
-disable
+##### disable
 
 ```javascript
 goCardlessApi.bankAccount.disable(id: string): Promise<{
@@ -141,7 +141,7 @@ goCardlessApi.bankAccount.disable(id: string): Promise<{
 }>
 ```
 
-bank account for customer id
+##### bank account for customer id
 
 returns an array of bank accounts for a customer by the given customer id.
 
@@ -174,7 +174,7 @@ goCardlessApi.customer
 
 #### Actions
 
-index
+##### index
 
 ```javascript
 goCardlessApi.customer.index({ limit: number }): Promise<{
@@ -203,7 +203,7 @@ goCardlessApi.customer.index({ limit: number }): Promise<{
 }>
 ```
 
-create
+##### create
 
 ```javascript
 goCardlessApi.customer.create({
@@ -244,7 +244,7 @@ goCardlessApi.customer.create({
 }>
 ```
 
-update
+##### update
 
 ```javascript
 goCardlessApi.customer.update(id: string, {
@@ -285,7 +285,7 @@ goCardlessApi.customer.update(id: string, {
 }>
 ```
 
-find
+##### find
 
 ```javascript
 goCardlessApi.customer.update(id: string): Promise<{
@@ -322,7 +322,7 @@ goCardlessApi.mandate
 
 #### Actions
 
-index
+##### index
 
 ```javascript
 goCardlessApi.mandate.index({ limit: number }): Promise<{
@@ -369,7 +369,7 @@ goCardlessApi.mandate.create({
   }>
 ```
 
-update
+##### update
 
 ```javascript
 goCardlessApi.mandates.update(id: string, {
@@ -392,7 +392,7 @@ goCardlessApi.mandates.update(id: string, {
   }>
 ```
 
-find
+##### find
 
 ```javascript
 goCardlessApi.mandates.find(id: string): Promise<{
@@ -421,7 +421,7 @@ goCardlessApi.payment
 
 #### Actions
 
-index
+##### index
 
 ```javascript
 goCardlessApi.payment.index({ limit: number }): Promise<{
@@ -443,7 +443,7 @@ goCardlessApi.payment.index({ limit: number }): Promise<{
 }>
 ```
 
-create
+##### create
 
 ```javascript
 goCardlessApi.payment.create({
@@ -472,7 +472,7 @@ goCardlessApi.payment.create({
 }>
 ```
 
-update
+##### update
 
 ```javascript
 goCardlessApi.payment.create(id: string, {
@@ -496,7 +496,7 @@ goCardlessApi.payment.create(id: string, {
 }>
 ```
 
-find
+##### find
 
 ```javascript
 goCardlessApi.payment.find(id: string): Promise<{
@@ -519,7 +519,7 @@ goCardlessApi.payment.find(id: string): Promise<{
 }>
 ```
 
-cancel
+##### cancel
 
 ```javascript
 goCardlessApi.payment.cancel(id: string, {
@@ -544,7 +544,7 @@ goCardlessApi.payment.cancel(id: string, {
 }>
 ```
 
-retry
+##### retry
 
 ```javascript
 goCardlessApi.payment.retry(id: string, {
@@ -577,7 +577,7 @@ goCardlessApi.payout
 
 #### Actions
 
-index
+##### index
 
 ```javascript
 goCardlessApi.payout.index({ limit: number }): Promise<{
@@ -597,7 +597,7 @@ goCardlessApi.payout.index({ limit: number }): Promise<{
 }>
 ```
 
-index
+##### index
 
 ```javascript
 goCardlessApi.payout.find(id: string): Promise<{
@@ -626,7 +626,7 @@ goCardlessApi.plan
 
 #### Actions
 
-index
+##### index
 
 ```javascript
 goCardlessApi.plan.index({ limit: number }): Promise<{
@@ -655,7 +655,7 @@ goCardlessApi.plan.index({ limit: number }): Promise<{
 }>
 ```
 
-find
+##### find
 
 ```javascript
 goCardlessApi.plan.find(id: string): Promise<{
@@ -685,7 +685,7 @@ goCardlessApi.plan.find(id: string): Promise<{
 }>
 ```
 
-create
+##### create
 
 ```javascript
 goCardlessApi.plan.create([
@@ -723,7 +723,7 @@ goCardlessApi.plan.create([
 }>
 ```
 
-cancel
+##### cancel
 
 ```javascript
 goCardlessApi.plan.cancel(id: string, {
