@@ -93,15 +93,15 @@ export class GoCardlessApi {
       if (responseJson.error.type === "validation_failed") {
         throw new GoCardlessError(
           errors.goCardlessValidationError,
-          responseJson.error.errors
+          responseJson.error
         );
       } else if (responseJson.error.type === "invalid_api_usage") {
         throw new GoCardlessError(
           errors.goCardlessApiError,
-          responseJson.error.errors
+          responseJson.error
         );
       } else {
-        throw new GoCardlessError(errors.server, responseJson.error.message);
+        throw new GoCardlessError(errors.server, responseJson.error);
       }
     } else {
       return responseJson;
