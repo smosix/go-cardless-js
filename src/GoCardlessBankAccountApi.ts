@@ -5,6 +5,7 @@ interface IGoCardlessBankBase {
   accountHolderName: string;
   customerId: string;
   currency: string;
+  metadata: Object;
 }
 
 export interface IGoCardlessApiBank {
@@ -65,7 +66,8 @@ export class GoCardlessBankAccountApi {
       branchCode,
       accountHolderName,
       customerId,
-      currency
+      currency,
+      metadata
     } = bank;
     return this.api.request("customer_bank_accounts", "POST", {
       customer_bank_accounts: {
@@ -74,6 +76,7 @@ export class GoCardlessBankAccountApi {
         account_holder_name: accountHolderName,
         country_code: "GB",
         currency,
+        metadata,
         links: {
           customer: customerId
         }

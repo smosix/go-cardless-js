@@ -4,8 +4,8 @@ import { GoCardlessError, errors } from "./errors";
 import { GoCardlessBankAccountApi } from "./GoCardlessBankAccountApi";
 import { GoCardlessCustomerApi } from "./GoCardlessCustomerApi";
 import { GoCardlessMandateApi } from "./GoCardlessMandateApi";
-import { GoCardlessPaymentApi } from "./GoCardlessPaymentsApi";
-import { GoCardlessPayoutApi } from "./GoCardlessPayoutsApi";
+import { GoCardlessPaymentApi } from "./GoCardlessPaymentApi";
+import { GoCardlessPayoutApi } from "./GoCardlessPayoutApi";
 import { GoCardlessPlanApi } from "./GoCardlessPlanApi";
 
 export type GoCardlessResponse = string | null;
@@ -27,9 +27,9 @@ export class GoCardlessApi {
   customer!: GoCardlessCustomerApi;
   bankAccount!: GoCardlessBankAccountApi;
   mandate!: GoCardlessMandateApi;
-  payments!: GoCardlessPaymentApi;
-  payouts!: GoCardlessPayoutApi;
-  plans!: GoCardlessPlanApi;
+  payment!: GoCardlessPaymentApi;
+  payout!: GoCardlessPayoutApi;
+  plan!: GoCardlessPlanApi;
 
   constructor(accessToken: string, sandbox = true) {
     this.sandbox = sandbox;
@@ -42,9 +42,9 @@ export class GoCardlessApi {
     this.customer = new GoCardlessCustomerApi(this);
     this.bankAccount = new GoCardlessBankAccountApi(this);
     this.mandate = new GoCardlessMandateApi(this);
-    this.payments = new GoCardlessPaymentApi(this);
-    this.payouts = new GoCardlessPayoutApi(this);
-    this.plans = new GoCardlessPlanApi(this);
+    this.payment = new GoCardlessPaymentApi(this);
+    this.payout = new GoCardlessPayoutApi(this);
+    this.plan = new GoCardlessPlanApi(this);
   }
 
   generateSessionToken(): string {

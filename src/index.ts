@@ -19,8 +19,8 @@ export {
 export {
   IGoCardlessPayment,
   IGoCardlessApiPayment
-} from "./GoCardlessPaymentsApi";
+} from "./GoCardlessPaymentApi";
 
-export { IGoCardlessApiPayout } from "./GoCardlessPayoutsApi";
+export { IGoCardlessApiPayout } from "./GoCardlessPayoutApi";
 
 export { IGoCardlessPlan, IGoCardlessApiPlan } from "./GoCardlessPlanApi";
