@@ -10,6 +10,19 @@ const goCardlessApi = new GoCardlessApi("accessToken", sandbox?:boolean)
 
 ```
 
+### Error Format
+
+```javascript
+{
+  "type": "500 Server",
+  "data": {
+    "message": string, // gocardless error message
+    "stack": string[]
+  },
+  "code": number
+}
+```
+
 ### Apis:
 
 ### Bank Account
