@@ -70,10 +70,12 @@ export class GoCardlessPlanApi {
       intervalUnit,
       metadata,
       mandateId,
-      count
+      count,
+      month
     } = plan;
     return this.api.request("subscriptions", "POST", {
       subscriptions: {
+        month,
         amount,
         currency,
         name,
