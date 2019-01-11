@@ -2,8 +2,8 @@ import { GoCardlessApi, GoCardlessResponse } from "./goCardlessApi";
 
 export type IGoCardlessPlanInterval = "weekly" | "monthly" | "yearly";
 export interface IGoCardlessPlan {
-  month: string;
-  startDate: string;
+  month?: string;
+  startDate?: string;
   amount: number;
   currency: string;
   name: string;
