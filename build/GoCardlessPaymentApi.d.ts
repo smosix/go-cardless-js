@@ -1,4 +1,4 @@
-import { GoCardlessApi, GoCardlessResponse, IndexRequestParams } from "./goCardlessApi";
+import { GoCardlessApi, IndexRequestParams } from "./goCardlessApi";
 export interface IGoCardlessPayment {
     amount: number;
     currency: string;
@@ -8,14 +8,14 @@ export interface IGoCardlessPayment {
     mandateId: string;
 }
 export interface IGoCardlessApiPayment {
-    id: GoCardlessResponse;
-    created_at: GoCardlessResponse;
-    charge_date: GoCardlessResponse;
+    id: string;
+    created_at: string;
+    charge_date: string;
     amount: number;
-    description: GoCardlessResponse;
-    currency: GoCardlessResponse;
-    status: GoCardlessResponse;
-    reference: GoCardlessResponse;
+    description: string;
+    currency: string;
+    status: string;
+    reference: string;
     metadata: Object;
     amount_refunded: number;
     links: {
@@ -27,8 +27,8 @@ interface IGoCardlessIndexResponse {
     payments: IGoCardlessApiPayment[];
     meta: {
         cursors: {
-            before: GoCardlessResponse;
-            after: GoCardlessResponse;
+            before: string;
+            after: string;
         };
         limit: number;
     };

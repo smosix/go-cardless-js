@@ -1,9 +1,4 @@
-import {
-  GoCardlessApi,
-  GoCardlessResponse,
-  IndexRequestParams,
-  urlParams
-} from "./goCardlessApi";
+import { GoCardlessApi, IndexRequestParams, urlParams } from "./goCardlessApi";
 
 interface IGoCardlessBankBase {
   branchCode: string;
@@ -14,17 +9,17 @@ interface IGoCardlessBankBase {
 }
 
 export interface IGoCardlessApiBank {
-  id: GoCardlessResponse;
-  created_at: GoCardlessResponse;
-  account_holder_name: GoCardlessResponse;
-  account_number_ending: GoCardlessResponse;
-  country_code: GoCardlessResponse;
-  currency: GoCardlessResponse;
-  bank_name: GoCardlessResponse;
+  id: string;
+  created_at: string;
+  account_holder_name: string;
+  account_number_ending: string;
+  country_code: string;
+  currency: string;
+  bank_name: string;
   metadata: {};
   enabled: boolean;
   links: {
-    customer: GoCardlessResponse;
+    customer: string;
   };
 }
 export interface IGoCardlessBankAccountNumber extends IGoCardlessBankBase {
@@ -46,8 +41,8 @@ interface IGoCardlessIndexResponse {
   customer_bank_accounts: IGoCardlessApiBank[];
   meta: {
     cursors: {
-      before: GoCardlessResponse;
-      after: GoCardlessResponse;
+      before: string;
+      after: string;
     };
     limit: number;
   };

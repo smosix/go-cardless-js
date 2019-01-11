@@ -1,4 +1,4 @@
-import { GoCardlessApi, GoCardlessResponse, IndexRequestParams } from "./goCardlessApi";
+import { GoCardlessApi, IndexRequestParams } from "./goCardlessApi";
 export interface IGoCardlessMandate {
     scheme?: string;
     metadata?: Object;
@@ -23,8 +23,8 @@ interface IGoCardlessIndexResponse {
     mandates: IGoCardlessApiMandate[];
     meta: {
         cursors: {
-            before: GoCardlessResponse;
-            after: GoCardlessResponse;
+            before: string;
+            after: string;
         };
         limit: number;
     };

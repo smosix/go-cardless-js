@@ -1,9 +1,4 @@
-import {
-  GoCardlessApi,
-  GoCardlessResponse,
-  IndexRequestParams,
-  urlParams
-} from "./goCardlessApi";
+import { GoCardlessApi, IndexRequestParams, urlParams } from "./goCardlessApi";
 
 export type IGoCardlessPlanInterval = "weekly" | "monthly" | "yearly";
 export interface IGoCardlessPlan {
@@ -27,12 +22,12 @@ export interface IGoCardlessApiPlan {
   status: string;
   name: string;
   start_date: string;
-  end_date: GoCardlessResponse;
+  end_date: string;
   interval: number;
   interval_unit: IGoCardlessPlanInterval;
   day_of_month: number;
-  month: GoCardlessResponse;
-  payment_reference: GoCardlessResponse;
+  month: string;
+  payment_reference: string;
   app_fee: string | number | null;
   upcoming_payments: { charge_date: string; amount: number }[];
   metadata: {
@@ -47,8 +42,8 @@ interface IGoCardlessIndexResponse {
   subscriptions: IGoCardlessApiPlan[];
   meta: {
     cursors: {
-      before: GoCardlessResponse;
-      after: GoCardlessResponse;
+      before: string;
+      after: string;
     };
     limit: number;
   };

@@ -1,8 +1,4 @@
-import {
-  GoCardlessResponse,
-  IndexRequestParams,
-  urlParams
-} from "./goCardlessApi";
+import { IndexRequestParams, urlParams } from "./goCardlessApi";
 import nodeFetch from "node-fetch";
 import { GoCardlessApi } from "./GoCardlessApi";
 export interface IGoCardlessCustomer {
@@ -20,23 +16,23 @@ export interface IGoCardlessCustomer {
 }
 
 export interface IGoCardlessApiCustomer {
-  id: GoCardlessResponse;
-  created_at: GoCardlessResponse;
-  email: GoCardlessResponse;
-  given_name: GoCardlessResponse;
-  family_name: GoCardlessResponse;
-  company_name: GoCardlessResponse;
-  address_line1: GoCardlessResponse;
-  address_line2: GoCardlessResponse;
-  address_line3: GoCardlessResponse;
-  city: GoCardlessResponse;
-  region: GoCardlessResponse;
-  postal_code: GoCardlessResponse;
-  country_code: GoCardlessResponse;
-  language: GoCardlessResponse;
-  swedish_identity_number: GoCardlessResponse;
-  danish_identity_number: GoCardlessResponse;
-  phone_number: GoCardlessResponse;
+  id: string;
+  created_at: string;
+  email: string;
+  given_name: string;
+  family_name: string;
+  company_name: string;
+  address_line1: string;
+  address_line2: string;
+  address_line3: string;
+  city: string;
+  region: string;
+  postal_code: string;
+  country_code: string;
+  language: string;
+  swedish_identity_number: string;
+  danish_identity_number: string;
+  phone_number: string;
   metadata: Object;
 }
 
@@ -44,8 +40,8 @@ interface IGoCardlessIndexResponse {
   customers: IGoCardlessApiCustomer[];
   meta: {
     cursors: {
-      before: GoCardlessResponse;
-      after: GoCardlessResponse;
+      before: string;
+      after: string;
     };
     limit: number;
   };

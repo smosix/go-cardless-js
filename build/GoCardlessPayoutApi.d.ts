@@ -1,4 +1,4 @@
-import { GoCardlessApi, GoCardlessResponse, IndexRequestParams } from "./goCardlessApi";
+import { GoCardlessApi, IndexRequestParams } from "./goCardlessApi";
 export interface IGoCardlessApiPayout {
     id: string;
     amount: number;
@@ -17,8 +17,8 @@ interface IGoCardlessIndexResponse {
     payouts: IGoCardlessApiPayout[];
     meta: {
         cursors: {
-            before: GoCardlessResponse;
-            after: GoCardlessResponse;
+            before: string;
+            after: string;
         };
         limit: number;
     };

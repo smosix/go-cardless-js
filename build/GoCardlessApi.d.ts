@@ -4,7 +4,7 @@ import { GoCardlessMandateApi } from "./GoCardlessMandateApi";
 import { GoCardlessPaymentApi } from "./GoCardlessPaymentApi";
 import { GoCardlessPayoutApi } from "./GoCardlessPayoutApi";
 import { GoCardlessPlanApi } from "./GoCardlessPlanApi";
-export declare type GoCardlessResponse = string | null;
+export declare type GoCardlessResponse = string | undefined;
 export declare const goCardlessTestUrl = "https://api-sandbox.gocardless.com/";
 export declare const goCardlessLiveUrl = "https://api.gocardless.com";
 export declare type IGoCardlessHeaders = {
