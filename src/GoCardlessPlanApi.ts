@@ -2,6 +2,8 @@ import { GoCardlessApi, GoCardlessResponse } from "./goCardlessApi";
 
 export type IGoCardlessPlanInterval = "weekly" | "monthly" | "yearly";
 export interface IGoCardlessPlan {
+  month: string;
+  startDate: string;
   amount: number;
   currency: string;
   name: string;
@@ -71,10 +73,12 @@ export class GoCardlessPlanApi {
       metadata,
       mandateId,
       count,
-      month
+      month,
+      startDate
     } = plan;
     return this.api.request("subscriptions", "POST", {
       subscriptions: {
+        start_date: startDate,
         month,
         amount,
         currency,
