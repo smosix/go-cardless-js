@@ -59,7 +59,9 @@ export class GoCardlessBankAccountApi {
     this.api = api;
   }
 
-  async index(params: IndexRequestParams): Promise<IGoCardlessIndexResponse> {
+  async index(
+    params?: IndexRequestParams & { [key: string]: string | number | undefined }
+  ): Promise<IGoCardlessIndexResponse> {
     return this.api.request(`customer_bank_accounts${urlParams(params)}`);
   }
 

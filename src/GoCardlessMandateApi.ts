@@ -44,7 +44,9 @@ export class GoCardlessMandateApi {
     this.api = api;
   }
 
-  async index(params: IndexRequestParams): Promise<IGoCardlessIndexResponse> {
+  async index(
+    params?: IndexRequestParams & { [key: string]: string | number | undefined }
+  ): Promise<IGoCardlessIndexResponse> {
     return this.api.request(`mandates${urlParams(params)}`);
   }
 

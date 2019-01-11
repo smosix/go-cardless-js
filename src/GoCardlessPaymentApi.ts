@@ -48,7 +48,9 @@ export class GoCardlessPaymentApi {
     this.api = api;
   }
 
-  async index(params: IndexRequestParams): Promise<IGoCardlessIndexResponse> {
+  async index(
+    params?: IndexRequestParams & { [key: string]: string | number | undefined }
+  ): Promise<IGoCardlessIndexResponse> {
     return this.api.request(`payments${urlParams(params)}`);
   }
 
