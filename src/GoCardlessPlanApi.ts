@@ -64,8 +64,11 @@ export class GoCardlessPlanApi {
     return this.api.request(`subscriptions${urlParams(params)}`);
   }
 
-  async find(id: string): Promise<{ subscriptions: IGoCardlessApiPlan }> {
-    return this.api.request(`subscriptions/${id}`);
+  async find(
+    id: string,
+    params?: { [key: string]: string | number | undefined }
+  ): Promise<{ subscriptions: IGoCardlessApiPlan }> {
+    return this.api.request(`subscriptions/${id}${urlParams(params)}`);
   }
 
   async create(

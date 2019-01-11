@@ -55,7 +55,9 @@ export declare class GoCardlessCustomerApi {
     update(id: string, customer: IGoCardlessCustomer): Promise<{
         customers: IGoCardlessApiCustomer;
     }>;
-    find(id: string): Promise<{
+    find(id: string, params?: {
+        [key: string]: string | number | undefined;
+    }): Promise<{
         customers: IGoCardlessApiCustomer;
     }>;
 }

@@ -99,9 +99,10 @@ export class GoCardlessBankAccountApi {
   }
 
   async find(
-    id: string
+    id: string,
+    params?: { [key: string]: string | number | undefined }
   ): Promise<{ customer_bank_accounts: IGoCardlessApiBank }> {
-    return this.api.request(`customer_bank_accounts/${id}`);
+    return this.api.request(`customer_bank_accounts/${id}${urlParams(params)}`);
   }
 
   async disable(

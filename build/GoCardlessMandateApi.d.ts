@@ -41,7 +41,9 @@ export declare class GoCardlessMandateApi {
     }): Promise<{
         mandates: IGoCardlessApiMandate;
     }>;
-    find(id: string): Promise<{
+    find(id: string, params?: {
+        [key: string]: string | number | undefined;
+    }): Promise<{
         mandates: IGoCardlessApiMandate;
     }>;
 }

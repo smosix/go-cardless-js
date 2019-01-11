@@ -41,7 +41,10 @@ export class GoCardlessPayoutApi {
     return this.api.request(`payouts${urlParams(params)}`);
   }
 
-  async find(id: string): Promise<{ payouts: IGoCardlessApiPayout }> {
-    return this.api.request(`payouts/${id}`);
+  async find(
+    id: string,
+    params?: { [key: string]: string | number | undefined }
+  ): Promise<{ payouts: IGoCardlessApiPayout }> {
+    return this.api.request(`payouts/${id}${urlParams(params)}`);
   }
 }

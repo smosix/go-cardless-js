@@ -47,10 +47,10 @@ var GoCardlessPlanApi = /** @class */ (function () {
             });
         });
     };
-    GoCardlessPlanApi.prototype.find = function (id) {
+    GoCardlessPlanApi.prototype.find = function (id, params) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("subscriptions/" + id)];
+                return [2 /*return*/, this.api.request("subscriptions/" + id + goCardlessApi_1.urlParams(params))];
             });
         });
     };

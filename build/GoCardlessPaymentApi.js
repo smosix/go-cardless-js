@@ -80,10 +80,10 @@ var GoCardlessPaymentApi = /** @class */ (function () {
             });
         });
     };
-    GoCardlessPaymentApi.prototype.find = function (id) {
+    GoCardlessPaymentApi.prototype.find = function (id, params) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("payments/" + id)];
+                return [2 /*return*/, this.api.request("payments/" + id + goCardlessApi_1.urlParams(params))];
             });
         });
     };

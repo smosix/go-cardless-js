@@ -79,10 +79,10 @@ var GoCardlessBankAccountApi = /** @class */ (function () {
             });
         });
     };
-    GoCardlessBankAccountApi.prototype.find = function (id) {
+    GoCardlessBankAccountApi.prototype.find = function (id, params) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("customer_bank_accounts/" + id)];
+                return [2 /*return*/, this.api.request("customer_bank_accounts/" + id + goCardlessApi_1.urlParams(params))];
             });
         });
     };

@@ -52,7 +52,9 @@ export declare class GoCardlessPlanApi {
     api: GoCardlessApi;
     constructor(api: GoCardlessApi);
     index(params: IndexRequestParams): Promise<IGoCardlessIndexResponse>;
-    find(id: string): Promise<{
+    find(id: string, params?: {
+        [key: string]: string | number | undefined;
+    }): Promise<{
         subscriptions: IGoCardlessApiPlan;
     }>;
     create(plan: IGoCardlessPlan): Promise<{

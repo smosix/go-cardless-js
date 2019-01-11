@@ -45,7 +45,9 @@ export declare class GoCardlessPaymentApi {
     }): Promise<{
         payments: IGoCardlessApiPayment;
     }>;
-    find(id: string): Promise<{
+    find(id: string, params?: {
+        [key: string]: string | number | undefined;
+    }): Promise<{
         payments: IGoCardlessApiPayment;
     }>;
     cancel(id: string, data: {

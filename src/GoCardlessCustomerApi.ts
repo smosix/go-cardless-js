@@ -126,7 +126,10 @@ export class GoCardlessCustomerApi {
     });
   }
 
-  async find(id: string): Promise<{ customers: IGoCardlessApiCustomer }> {
-    return this.api.request("customers" + `/${id}`);
+  async find(
+    id: string,
+    params?: { [key: string]: string | number | undefined }
+  ): Promise<{ customers: IGoCardlessApiCustomer }> {
+    return this.api.request("customers" + `/${id}${urlParams(params)}`);
   }
 }

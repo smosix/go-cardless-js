@@ -52,7 +52,9 @@ export declare class GoCardlessBankAccountApi {
     update(id: string, bank: IGoCardlessBankUpdate): Promise<{
         customer_bank_accounts: IGoCardlessApiBank;
     }>;
-    find(id: string): Promise<{
+    find(id: string, params?: {
+        [key: string]: string | number | undefined;
+    }): Promise<{
         customer_bank_accounts: IGoCardlessApiBank;
     }>;
     disable(id: string): Promise<{

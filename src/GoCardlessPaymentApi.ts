@@ -88,8 +88,11 @@ export class GoCardlessPaymentApi {
     });
   }
 
-  async find(id: string): Promise<{ payments: IGoCardlessApiPayment }> {
-    return this.api.request(`payments/${id}`);
+  async find(
+    id: string,
+    params?: { [key: string]: string | number | undefined }
+  ): Promise<{ payments: IGoCardlessApiPayment }> {
+    return this.api.request(`payments/${id}${urlParams(params)}`);
   }
 
   async cancel(

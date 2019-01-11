@@ -75,7 +75,10 @@ export class GoCardlessMandateApi {
     });
   }
 
-  async find(id: string): Promise<{ mandates: IGoCardlessApiMandate }> {
-    return this.api.request(`mandates/${id}`);
+  async find(
+    id: string,
+    params?: { [key: string]: string | number | undefined }
+  ): Promise<{ mandates: IGoCardlessApiMandate }> {
+    return this.api.request(`mandates/${id}${urlParams(params)}`);
   }
 }
