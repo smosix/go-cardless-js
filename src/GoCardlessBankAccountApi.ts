@@ -1,4 +1,9 @@
-import { GoCardlessApi, GoCardlessResponse } from "./goCardlessApi";
+import {
+  GoCardlessApi,
+  GoCardlessResponse,
+  IndexRequestParams,
+  urlParams
+} from "./goCardlessApi";
 
 interface IGoCardlessBankBase {
   branchCode: string;
@@ -54,8 +59,8 @@ export class GoCardlessBankAccountApi {
     this.api = api;
   }
 
-  async index({ limit }: { limit: number }): Promise<IGoCardlessIndexResponse> {
-    return this.api.request(`customer_bank_accounts?limit=${limit || 20}`);
+  async index(params: IndexRequestParams): Promise<IGoCardlessIndexResponse> {
+    return this.api.request(`customer_bank_accounts${urlParams(params)}`);
   }
 
   async create(

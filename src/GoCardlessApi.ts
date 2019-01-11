@@ -20,6 +20,17 @@ export type IGoCardlessHeaders = {
   Authorization: string;
   session_token: string;
 };
+export type IndexRequestParams = {
+  limit?: number;
+  after?: string;
+  before?: string;
+};
+
+export function urlParams(params = {}) {
+  return Object.entries(params)
+    .map(([k, v], i) => (i === 0 ? `?${k}=${v}` : `&${k}=v`))
+    .join("");
+}
 export class GoCardlessApi {
   session_token = "";
   accessToken: string;

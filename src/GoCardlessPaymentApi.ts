@@ -1,54 +1,68 @@
-import { GoCardlessApi, GoCardlessResponse } from "./goCardlessApi"
+import {
+  GoCardlessApi,
+  GoCardlessResponse,
+  IndexRequestParams,
+  urlParams
+} from "./goCardlessApi";
 
 export interface IGoCardlessPayment {
-  amount: number
-  currency: string
-  charge_date: string
-  reference?: string
-  metadata?: Object
-  mandateId: string
+  amount: number;
+  currency: string;
+  charge_date: string;
+  reference?: string;
+  metadata?: Object;
+  mandateId: string;
 }
 
 export interface IGoCardlessApiPayment {
-  id: GoCardlessResponse
-  created_at: GoCardlessResponse
-  charge_date: GoCardlessResponse
-  amount: number
-  description: GoCardlessResponse
-  currency: GoCardlessResponse
-  status: GoCardlessResponse
-  reference: GoCardlessResponse
-  metadata: Object
-  amount_refunded: number
+  id: GoCardlessResponse;
+  created_at: GoCardlessResponse;
+  charge_date: GoCardlessResponse;
+  amount: number;
+  description: GoCardlessResponse;
+  currency: GoCardlessResponse;
+  status: GoCardlessResponse;
+  reference: GoCardlessResponse;
+  metadata: Object;
+  amount_refunded: number;
   links: {
-    mandate: string
-    creditor: string
-  }
+    mandate: string;
+    creditor: string;
+  };
 }
 
 interface IGoCardlessIndexResponse {
-  payments: IGoCardlessApiPayment[]
+  payments: IGoCardlessApiPayment[];
   meta: {
     cursors: {
-      before: GoCardlessResponse
-      after: GoCardlessResponse
-    }
-    limit: number
-  }
+      before: GoCardlessResponse;
+      after: GoCardlessResponse;
+    };
+    limit: number;
+  };
 }
 
 export class GoCardlessPaymentApi {
-  api: GoCardlessApi
+  api: GoCardlessApi;
   constructor(api: GoCardlessApi) {
-    this.api = api
+    this.api = api;
   }
 
-  async index({ limit }: { limit: number }): Promise<IGoCardlessIndexResponse> {
-    return this.api.request(`payments?limit=${limit || 20}`)
+  async index(params: IndexRequestParams): Promise<IGoCardlessIndexResponse> {
+    return this.api.request(`payments${urlParams(params)}`);
   }
 
-  async create(payment: IGoCardlessPayment): Promise<{ payments: IGoCardlessApiPayment }> {
-    const { amount, currency, charge_date, reference, metadata, mandateId } = payment
+  async create(
+    payment: IGoCardlessPayment
+  ): Promise<{ payments: IGoCardlessApiPayment }> {
+    const {
+      amount,
+      currency,
+      charge_date,
+      reference,
+      metadata,
+      mandateId
+    } = payment;
     return this.api.request("payments", "POST", {
       payments: {
         amount,
@@ -57,38 +71,38 @@ export class GoCardlessPaymentApi {
         // reference,
         metadata,
         links: {
-          mandate: mandateId,
-        },
-      },
-    })
+          mandate: mandateId
+        }
+      }
+    });
   }
   async update(
     id: string,
-    payment: { metadata: Object },
+    payment: { metadata: Object }
   ): Promise<{ payments: IGoCardlessApiPayment }> {
-    const { metadata } = payment
+    const { metadata } = payment;
     return this.api.request(`payments/${id}`, "PUT", {
       payments: {
-        metadata,
-      },
-    })
+        metadata
+      }
+    });
   }
 
   async find(id: string): Promise<{ payments: IGoCardlessApiPayment }> {
-    return this.api.request(`payments/${id}`)
+    return this.api.request(`payments/${id}`);
   }
 
   async cancel(
     id: string,
-    data: { metadata: Object },
+    data: { metadata: Object }
   ): Promise<{ payments: IGoCardlessApiPayment }> {
-    return this.api.request(`payments/${id}/actions/cancel`, "POST", data)
+    return this.api.request(`payments/${id}/actions/cancel`, "POST", data);
   }
 
   async retry(
     id: string,
-    data: { metadata: Object },
+    data: { metadata: Object }
   ): Promise<{ payments: IGoCardlessApiPayment }> {
-    return this.api.request(`payments/${id}/actions/retry`, "POST", data)
+    return this.api.request(`payments/${id}/actions/retry`, "POST", data);
   }
 }

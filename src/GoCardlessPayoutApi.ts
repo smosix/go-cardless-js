@@ -1,42 +1,47 @@
-import { GoCardlessApi, GoCardlessResponse } from "./goCardlessApi"
+import {
+  GoCardlessApi,
+  GoCardlessResponse,
+  IndexRequestParams,
+  urlParams
+} from "./goCardlessApi";
 
 export interface IGoCardlessApiPayout {
-  id: string
-  amount: number
-  deducted_fees: number
-  currency: string
-  created_at: string
-  reference: string
-  arrival_date: string
-  status: string
+  id: string;
+  amount: number;
+  deducted_fees: number;
+  currency: string;
+  created_at: string;
+  reference: string;
+  arrival_date: string;
+  status: string;
   links: {
-    creditor_bank_account: string
-    creditor: string
-  }
+    creditor_bank_account: string;
+    creditor: string;
+  };
 }
 
 interface IGoCardlessIndexResponse {
-  payouts: IGoCardlessApiPayout[]
+  payouts: IGoCardlessApiPayout[];
   meta: {
     cursors: {
-      before: GoCardlessResponse
-      after: GoCardlessResponse
-    }
-    limit: number
-  }
+      before: GoCardlessResponse;
+      after: GoCardlessResponse;
+    };
+    limit: number;
+  };
 }
 
 export class GoCardlessPayoutApi {
-  api: GoCardlessApi
+  api: GoCardlessApi;
   constructor(api: GoCardlessApi) {
-    this.api = api
+    this.api = api;
   }
 
-  async index({ limit }: { limit: number }): Promise<IGoCardlessIndexResponse> {
-    return this.api.request(`payouts?limit=${limit || 20}`)
+  async index(params: IndexRequestParams): Promise<IGoCardlessIndexResponse> {
+    return this.api.request(`payouts${urlParams(params)}`);
   }
 
   async find(id: string): Promise<{ payouts: IGoCardlessApiPayout }> {
-    return this.api.request(`payouts/${id}`)
+    return this.api.request(`payouts/${id}`);
   }
 }

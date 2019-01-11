@@ -1,4 +1,9 @@
-import { GoCardlessApi, GoCardlessResponse } from "./goCardlessApi";
+import {
+  GoCardlessApi,
+  GoCardlessResponse,
+  IndexRequestParams,
+  urlParams
+} from "./goCardlessApi";
 
 export type IGoCardlessPlanInterval = "weekly" | "monthly" | "yearly";
 export interface IGoCardlessPlan {
@@ -55,8 +60,8 @@ export class GoCardlessPlanApi {
     this.api = api;
   }
 
-  async index({ limit }: { limit: number }): Promise<IGoCardlessIndexResponse> {
-    return this.api.request(`subscriptions?limit=${limit || 20}`);
+  async index(params: IndexRequestParams): Promise<IGoCardlessIndexResponse> {
+    return this.api.request(`subscriptions${urlParams(params)}`);
   }
 
   async find(id: string): Promise<{ subscriptions: IGoCardlessApiPlan }> {

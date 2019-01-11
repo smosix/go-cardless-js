@@ -1,4 +1,8 @@
-import { GoCardlessResponse } from "./goCardlessApi";
+import {
+  GoCardlessResponse,
+  IndexRequestParams,
+  urlParams
+} from "./goCardlessApi";
 import nodeFetch from "node-fetch";
 import { GoCardlessApi } from "./GoCardlessApi";
 export interface IGoCardlessCustomer {
@@ -53,8 +57,8 @@ export class GoCardlessCustomerApi {
     this.api = api;
   }
 
-  async index({ limit }: { limit: number }): Promise<IGoCardlessIndexResponse> {
-    return this.api.request("customers" + `?limit=${limit || 20}`);
+  async index(params: IndexRequestParams): Promise<IGoCardlessIndexResponse> {
+    return this.api.request(`customers${urlParams(params)}`);
   }
 
   async create(
