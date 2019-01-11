@@ -30,7 +30,11 @@ export function urlParams(
   params: { [key: string]: string | number | undefined } = {}
 ) {
   return Object.keys(params)
-    .map((k, i) => (i === 0 ? `?${k}=${params[k]}` : `&${k}=${params[k]}`))
+    .map(
+      (k, i) =>
+        params[k] && (i === 0 ? `?${k}=${params[k]}` : `&${k}=${params[k]}`)
+    )
+    .filter(Boolean)
     .join("");
 }
 export class GoCardlessApi {
