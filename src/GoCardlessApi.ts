@@ -26,7 +26,9 @@ export type IndexRequestParams = {
   before?: string;
 };
 
-export function urlParams(params: { [key: string]: string | number } = {}) {
+export function urlParams(
+  params: { [key: string]: string | number | undefined } = {}
+) {
   return Object.keys(params)
     .map((k, i) => (i === 0 ? `?${k}=${params[k]}` : `&${k}=${params[k]}`))
     .join("");

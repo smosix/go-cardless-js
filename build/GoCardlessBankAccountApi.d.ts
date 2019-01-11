@@ -1,4 +1,4 @@
-import { GoCardlessApi, GoCardlessResponse } from "./goCardlessApi";
+import { GoCardlessApi, GoCardlessResponse, IndexRequestParams } from "./goCardlessApi";
 interface IGoCardlessBankBase {
     branchCode: string;
     accountHolderName: string;
@@ -45,9 +45,7 @@ interface IGoCardlessIndexResponse {
 export declare class GoCardlessBankAccountApi {
     api: GoCardlessApi;
     constructor(api: GoCardlessApi);
-    index({ limit }: {
-        limit: number;
-    }): Promise<IGoCardlessIndexResponse>;
+    index(params: IndexRequestParams): Promise<IGoCardlessIndexResponse>;
     create(bank: IGoCardlessBank): Promise<{
         customer_bank_accounts: IGoCardlessApiBank;
     }>;

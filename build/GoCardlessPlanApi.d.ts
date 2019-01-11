@@ -1,4 +1,4 @@
-import { GoCardlessApi, GoCardlessResponse } from "./goCardlessApi";
+import { GoCardlessApi, GoCardlessResponse, IndexRequestParams } from "./goCardlessApi";
 export declare type IGoCardlessPlanInterval = "weekly" | "monthly" | "yearly";
 export interface IGoCardlessPlan {
     month?: string;
@@ -51,9 +51,7 @@ interface IGoCardlessIndexResponse {
 export declare class GoCardlessPlanApi {
     api: GoCardlessApi;
     constructor(api: GoCardlessApi);
-    index({ limit }: {
-        limit: number;
-    }): Promise<IGoCardlessIndexResponse>;
+    index(params: IndexRequestParams): Promise<IGoCardlessIndexResponse>;
     find(id: string): Promise<{
         subscriptions: IGoCardlessApiPlan;
     }>;

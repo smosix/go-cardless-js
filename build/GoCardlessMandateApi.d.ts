@@ -1,4 +1,4 @@
-import { GoCardlessApi, GoCardlessResponse } from "./goCardlessApi";
+import { GoCardlessApi, GoCardlessResponse, IndexRequestParams } from "./goCardlessApi";
 export interface IGoCardlessMandate {
     scheme?: string;
     metadata?: Object;
@@ -32,9 +32,7 @@ interface IGoCardlessIndexResponse {
 export declare class GoCardlessMandateApi {
     api: GoCardlessApi;
     constructor(api: GoCardlessApi);
-    index({ limit }: {
-        limit: number;
-    }): Promise<IGoCardlessIndexResponse>;
+    index(params: IndexRequestParams): Promise<IGoCardlessIndexResponse>;
     create(mandate: IGoCardlessMandate): Promise<{
         mandates: IGoCardlessApiMandate;
     }>;

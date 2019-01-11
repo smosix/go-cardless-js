@@ -35,15 +35,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var goCardlessApi_1 = require("./goCardlessApi");
 var GoCardlessBankAccountApi = /** @class */ (function () {
     function GoCardlessBankAccountApi(api) {
         this.api = api;
     }
-    GoCardlessBankAccountApi.prototype.index = function (_a) {
-        var limit = _a.limit;
+    GoCardlessBankAccountApi.prototype.index = function (params) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_b) {
-                return [2 /*return*/, this.api.request("customer_bank_accounts?limit=" + (limit || 20))];
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.api.request("customer_bank_accounts" + goCardlessApi_1.urlParams(params))];
             });
         });
     };

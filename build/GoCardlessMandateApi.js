@@ -35,15 +35,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var goCardlessApi_1 = require("./goCardlessApi");
 var GoCardlessMandateApi = /** @class */ (function () {
     function GoCardlessMandateApi(api) {
         this.api = api;
     }
-    GoCardlessMandateApi.prototype.index = function (_a) {
-        var limit = _a.limit;
+    GoCardlessMandateApi.prototype.index = function (params) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_b) {
-                return [2 /*return*/, this.api.request("mandates?limit=" + (limit || 20))];
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.api.request("mandates" + goCardlessApi_1.urlParams(params))];
             });
         });
     };
@@ -58,9 +58,9 @@ var GoCardlessMandateApi = /** @class */ (function () {
                             metadata: metadata,
                             links: {
                                 customer_bank_account: customer_bank_account,
-                                creditor: creditor,
-                            },
-                        },
+                                creditor: creditor //TODO SET THIS TO WHOMEVER NEEDS PAYING
+                            }
+                        }
                     })];
             });
         });
@@ -72,8 +72,8 @@ var GoCardlessMandateApi = /** @class */ (function () {
                 metadata = mandate.metadata;
                 return [2 /*return*/, this.api.request("mandates/" + id, "PUT", {
                         mandates: {
-                            metadata: metadata,
-                        },
+                            metadata: metadata
+                        }
                     })];
             });
         });

@@ -15,6 +15,14 @@ export declare type IGoCardlessHeaders = {
     Authorization: string;
     session_token: string;
 };
+export declare type IndexRequestParams = {
+    limit?: number;
+    after?: string;
+    before?: string;
+};
+export declare function urlParams(params?: {
+    [key: string]: string | number | undefined;
+}): string;
 export declare class GoCardlessApi {
     session_token: string;
     accessToken: string;

@@ -35,15 +35,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var goCardlessApi_1 = require("./goCardlessApi");
 var GoCardlessPaymentApi = /** @class */ (function () {
     function GoCardlessPaymentApi(api) {
         this.api = api;
     }
-    GoCardlessPaymentApi.prototype.index = function (_a) {
-        var limit = _a.limit;
+    GoCardlessPaymentApi.prototype.index = function (params) {
         return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_b) {
-                return [2 /*return*/, this.api.request("payments?limit=" + (limit || 20))];
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.api.request("payments" + goCardlessApi_1.urlParams(params))];
             });
         });
     };
@@ -60,9 +60,9 @@ var GoCardlessPaymentApi = /** @class */ (function () {
                             // reference,
                             metadata: metadata,
                             links: {
-                                mandate: mandateId,
-                            },
-                        },
+                                mandate: mandateId
+                            }
+                        }
                     })];
             });
         });
@@ -74,8 +74,8 @@ var GoCardlessPaymentApi = /** @class */ (function () {
                 metadata = payment.metadata;
                 return [2 /*return*/, this.api.request("payments/" + id, "PUT", {
                         payments: {
-                            metadata: metadata,
-                        },
+                            metadata: metadata
+                        }
                     })];
             });
         });

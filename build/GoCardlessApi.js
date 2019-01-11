@@ -49,6 +49,13 @@ var GoCardlessPlanApi_1 = require("./GoCardlessPlanApi");
 // docs = https://developer.gocardless.com/api-reference/#api-usage-making-requests
 exports.goCardlessTestUrl = "https://api-sandbox.gocardless.com/";
 exports.goCardlessLiveUrl = "https://api.gocardless.com";
+function urlParams(params) {
+    if (params === void 0) { params = {}; }
+    return Object.keys(params)
+        .map(function (k, i) { return (i === 0 ? "?" + k + "=" + params[k] : "&" + k + "=" + params[k]); })
+        .join("");
+}
+exports.urlParams = urlParams;
 var GoCardlessApi = /** @class */ (function () {
     function GoCardlessApi(accessToken, sandbox) {
         if (sandbox === void 0) { sandbox = true; }
