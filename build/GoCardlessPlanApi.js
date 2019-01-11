@@ -56,11 +56,14 @@ var GoCardlessPlanApi = /** @class */ (function () {
     };
     GoCardlessPlanApi.prototype.create = function (plan) {
         return __awaiter(this, void 0, void 0, function () {
-            var amount, currency, name, intervalUnit, metadata, mandateId, count;
+            var amount, currency, name, intervalUnit, metadata, mandateId, count, month, startDate, dayOfMonth;
             return __generator(this, function (_a) {
-                amount = plan.amount, currency = plan.currency, name = plan.name, intervalUnit = plan.intervalUnit, metadata = plan.metadata, mandateId = plan.mandateId, count = plan.count;
+                amount = plan.amount, currency = plan.currency, name = plan.name, intervalUnit = plan.intervalUnit, metadata = plan.metadata, mandateId = plan.mandateId, count = plan.count, month = plan.month, startDate = plan.startDate, dayOfMonth = plan.dayOfMonth;
                 return [2 /*return*/, this.api.request("subscriptions", "POST", {
                         subscriptions: {
+                            start_date: startDate,
+                            day_of_month: dayOfMonth,
+                            month: month,
                             amount: amount,
                             currency: currency,
                             name: name,
@@ -68,9 +71,9 @@ var GoCardlessPlanApi = /** @class */ (function () {
                             metadata: metadata,
                             count: count,
                             links: {
-                                mandate: mandateId,
-                            },
-                        },
+                                mandate: mandateId
+                            }
+                        }
                     })];
             });
         });

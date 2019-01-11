@@ -25,7 +25,8 @@ var errors;
 var GoCardlessError = /** @class */ (function (_super) {
     __extends(GoCardlessError, _super);
     function GoCardlessError(type, data) {
-        var _this = _super.call(this, type + (data ? "-" + JSON.stringify(data) : "")) || this;
+        if (data === void 0) { data = {}; }
+        var _this = _super.call(this, JSON.stringify({ message: type, data: data })) || this;
         _this.type = type;
         _this.data = data;
         Object.setPrototypeOf(_this, GoCardlessError.prototype);

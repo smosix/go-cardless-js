@@ -1,6 +1,9 @@
 import { GoCardlessApi, GoCardlessResponse } from "./goCardlessApi";
 export declare type IGoCardlessPlanInterval = "weekly" | "monthly" | "yearly";
 export interface IGoCardlessPlan {
+    month?: string;
+    dayOfMonth?: string;
+    startDate?: string;
     amount: number;
     currency: string;
     name: string;
@@ -60,7 +63,7 @@ export declare class GoCardlessPlanApi {
     cancel(id: string, data: {
         metadata: Object;
     }): Promise<{
-        payments: IGoCardlessApiPlan;
+        subscriptions: IGoCardlessApiPlan;
     }>;
 }
 export {};

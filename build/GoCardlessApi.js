@@ -91,11 +91,15 @@ var GoCardlessApi = /** @class */ (function () {
     };
     GoCardlessApi.prototype.request = function (path, method, data) {
         if (method === void 0) { method = "GET"; }
-        return node_fetch_1.default(this.getBaseUrl() + path, {
-            method: method,
-            headers: this.getHeaders(),
-            body: JSON.stringify(data)
-        }).then(this.handleGoCardlessResponse);
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, node_fetch_1.default(this.getBaseUrl() + path, {
+                        method: method,
+                        headers: this.getHeaders(),
+                        body: JSON.stringify(data)
+                    }).then(this.handleGoCardlessResponse)];
+            });
+        });
     };
     GoCardlessApi.prototype.handleGoCardlessResponse = function (response) {
         return __awaiter(this, void 0, void 0, function () {
@@ -107,13 +111,13 @@ var GoCardlessApi = /** @class */ (function () {
                         responseJson = _a.sent();
                         if (responseJson.error) {
                             if (responseJson.error.type === "validation_failed") {
-                                throw new errors_1.GoCardlessError(errors_1.errors.goCardlessValidationError, responseJson.error.errors);
+                                throw new errors_1.GoCardlessError(errors_1.errors.goCardlessValidationError, responseJson.error);
                             }
                             else if (responseJson.error.type === "invalid_api_usage") {
-                                throw new errors_1.GoCardlessError(errors_1.errors.goCardlessApiError, responseJson.error.errors);
+                                throw new errors_1.GoCardlessError(errors_1.errors.goCardlessApiError, responseJson.error);
                             }
                             else {
-                                throw new errors_1.GoCardlessError(errors_1.errors.server, responseJson.error.message);
+                                throw new errors_1.GoCardlessError(errors_1.errors.server, responseJson.error);
                             }
                         }
                         else {
