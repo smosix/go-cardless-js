@@ -26,9 +26,9 @@ export type IndexRequestParams = {
   before?: string;
 };
 
-export function urlParams(params = {}) {
-  return Object.entries(params)
-    .map(([k, v], i) => (i === 0 ? `?${k}=${v}` : `&${k}=v`))
+export function urlParams(params: { [key: string]: string | number } = {}) {
+  return Object.keys(params)
+    .map((k, i) => (i === 0 ? `?${k}=${params[k]}` : `&${params[k]}=v`))
     .join("");
 }
 export class GoCardlessApi {
