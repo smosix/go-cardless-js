@@ -32,7 +32,7 @@ interface IGoCardlessIndexResponse {
 export declare class GoCardlessMandateApi {
     api: GoCardlessApi;
     constructor(api: GoCardlessApi);
-    index(params?: IndexRequestParams & {
+    index(params?: IndexRequestParams | {
         [key: string]: string | number | undefined;
     }): Promise<IGoCardlessIndexResponse>;
     create(mandate: IGoCardlessMandate): Promise<{

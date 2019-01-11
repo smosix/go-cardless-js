@@ -26,7 +26,7 @@ interface IGoCardlessIndexResponse {
 export declare class GoCardlessPayoutApi {
     api: GoCardlessApi;
     constructor(api: GoCardlessApi);
-    index(params?: IndexRequestParams & {
+    index(params?: IndexRequestParams | {
         [key: string]: string | number | undefined;
     }): Promise<IGoCardlessIndexResponse>;
     find(id: string, params?: {

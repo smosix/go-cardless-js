@@ -58,7 +58,7 @@ export class GoCardlessCustomerApi {
   }
 
   async index(
-    params?: IndexRequestParams & { [key: string]: string | number | undefined }
+    params?: IndexRequestParams | { [key: string]: string | number | undefined }
   ): Promise<IGoCardlessIndexResponse> {
     return this.api.request(`customers${urlParams(params)}`);
   }
