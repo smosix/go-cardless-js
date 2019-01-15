@@ -35,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var goCardlessApi_1 = require("./goCardlessApi");
+var GoCardlessApi_1 = require("./GoCardlessApi");
 var GoCardlessBankAccountApi = /** @class */ (function () {
     function GoCardlessBankAccountApi(api) {
         this.api = api;
@@ -43,7 +43,7 @@ var GoCardlessBankAccountApi = /** @class */ (function () {
     GoCardlessBankAccountApi.prototype.index = function (params) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("customer_bank_accounts" + goCardlessApi_1.urlParams(params))];
+                return [2 /*return*/, this.api.request("customer_bank_accounts" + GoCardlessApi_1.urlParams(params))];
             });
         });
     };
@@ -82,7 +82,7 @@ var GoCardlessBankAccountApi = /** @class */ (function () {
     GoCardlessBankAccountApi.prototype.find = function (id, params) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("customer_bank_accounts/" + id + goCardlessApi_1.urlParams(params))];
+                return [2 /*return*/, this.api.request("customer_bank_accounts/" + id + GoCardlessApi_1.urlParams(params))];
             });
         });
     };

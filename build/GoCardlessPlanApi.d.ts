@@ -1,4 +1,4 @@
-import { GoCardlessApi, IndexRequestParams } from "./goCardlessApi";
+import { GoCardlessApi, IndexRequestParams } from "./GoCardlessApi";
 export declare type IGoCardlessPlanInterval = "weekly" | "monthly" | "yearly";
 export interface IGoCardlessPlan {
     month?: string;

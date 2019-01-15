@@ -35,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var goCardlessApi_1 = require("./goCardlessApi");
+var GoCardlessApi_1 = require("./GoCardlessApi");
 var GoCardlessPaymentApi = /** @class */ (function () {
     function GoCardlessPaymentApi(api) {
         this.api = api;
@@ -43,7 +43,7 @@ var GoCardlessPaymentApi = /** @class */ (function () {
     GoCardlessPaymentApi.prototype.index = function (params) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("payments" + goCardlessApi_1.urlParams(params))];
+                return [2 /*return*/, this.api.request("payments" + GoCardlessApi_1.urlParams(params))];
             });
         });
     };
@@ -83,7 +83,7 @@ var GoCardlessPaymentApi = /** @class */ (function () {
     GoCardlessPaymentApi.prototype.find = function (id, params) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("payments/" + id + goCardlessApi_1.urlParams(params))];
+                return [2 /*return*/, this.api.request("payments/" + id + GoCardlessApi_1.urlParams(params))];
             });
         });
     };

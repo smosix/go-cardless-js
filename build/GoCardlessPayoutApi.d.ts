@@ -1,4 +1,4 @@
-import { GoCardlessApi, IndexRequestParams } from "./goCardlessApi";
+import { GoCardlessApi, IndexRequestParams } from "./GoCardlessApi";
 export interface IGoCardlessApiPayout {
     id: string;
     amount: number;
