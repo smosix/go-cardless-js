@@ -1,4 +1,4 @@
-import { GoCardlessApi, IndexRequestParams, urlParams } from "./goCardlessApi";
+import { GoCardlessApi, IndexRequestParams, urlParams } from "./GoCardlessApi";
 
 interface IGoCardlessBankBase {
   branchCode: string;

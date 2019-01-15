@@ -1,4 +1,4 @@
-import { GoCardlessApi, urlParams, IndexRequestParams } from "./goCardlessApi";
+import { GoCardlessApi, urlParams, IndexRequestParams } from "./GoCardlessApi";
 
 export interface IGoCardlessMandate {
   scheme?: string;

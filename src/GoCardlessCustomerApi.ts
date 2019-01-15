@@ -1,4 +1,4 @@
-import { IndexRequestParams, urlParams } from "./goCardlessApi";
+import { IndexRequestParams, urlParams } from "./GoCardlessApi";
 import nodeFetch from "node-fetch";
 import { GoCardlessApi } from "./GoCardlessApi";
 export interface IGoCardlessCustomer {
