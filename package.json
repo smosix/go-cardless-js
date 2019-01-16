@@ -1,6 +1,6 @@
 {
   "name": "go-cardless-js",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "main": "build/index.js",
   "author": "CD2",
   "license": "MIT",
