@@ -94,14 +94,14 @@ export class GoCardlessPaymentApi {
 
   async cancel(
     id: string,
-    data: { metadata: Object }
+    data?: { metadata: Object }
   ): Promise<{ payments: IGoCardlessApiPayment }> {
     return this.api.request(`payments/${id}/actions/cancel`, "POST", data);
   }
 
   async retry(
     id: string,
-    data: { metadata: Object }
+    data?: { metadata: Object }
   ): Promise<{ payments: IGoCardlessApiPayment }> {
     return this.api.request(`payments/${id}/actions/retry`, "POST", data);
   }

@@ -62,7 +62,7 @@ export declare class GoCardlessPlanApi {
     create(plan: IGoCardlessPlan): Promise<{
         subscriptions: IGoCardlessApiPlan;
     }>;
-    cancel(id: string, data: {
+    cancel(id: string, data?: {
         metadata: Object;
     }): Promise<{
         subscriptions: IGoCardlessApiPlan;

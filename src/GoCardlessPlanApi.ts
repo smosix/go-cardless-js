@@ -103,7 +103,7 @@ export class GoCardlessPlanApi {
 
   async cancel(
     id: string,
-    data: { metadata: Object }
+    data?: { metadata: Object }
   ): Promise<{ subscriptions: IGoCardlessApiPlan }> {
     return this.api.request(`subscriptions/${id}/actions/cancel`, "POST", data);
   }

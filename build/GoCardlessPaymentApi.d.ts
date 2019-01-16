@@ -52,12 +52,12 @@ export declare class GoCardlessPaymentApi {
     }): Promise<{
         payments: IGoCardlessApiPayment;
     }>;
-    cancel(id: string, data: {
+    cancel(id: string, data?: {
         metadata: Object;
     }): Promise<{
         payments: IGoCardlessApiPayment;
     }>;
-    retry(id: string, data: {
+    retry(id: string, data?: {
         metadata: Object;
     }): Promise<{
         payments: IGoCardlessApiPayment;
