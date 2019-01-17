@@ -5,3 +5,4 @@ export { IGoCardlessMandate, IGoCardlessApiMandate } from "./GoCardlessMandateAp
 export { IGoCardlessPayment, IGoCardlessApiPayment } from "./GoCardlessPaymentApi";
 export { IGoCardlessApiPayout } from "./GoCardlessPayoutApi";
 export { IGoCardlessPlan, IGoCardlessApiPlan } from "./GoCardlessPlanApi";
+export { IGoCardlessRedirectFlow, IGoCardlessApiRedirectFlow } from "./GoCardlessRedirectFlowApi";

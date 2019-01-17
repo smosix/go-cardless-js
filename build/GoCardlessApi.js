@@ -46,6 +46,7 @@ var GoCardlessMandateApi_1 = require("./GoCardlessMandateApi");
 var GoCardlessPaymentApi_1 = require("./GoCardlessPaymentApi");
 var GoCardlessPayoutApi_1 = require("./GoCardlessPayoutApi");
 var GoCardlessPlanApi_1 = require("./GoCardlessPlanApi");
+var GoCardlessRedirectFlowApi_1 = require("./GoCardlessRedirectFlowApi");
 // docs = https://developer.gocardless.com/api-reference/#api-usage-making-requests
 exports.goCardlessTestUrl = "https://api-sandbox.gocardless.com/";
 exports.goCardlessLiveUrl = "https://api.gocardless.com";
@@ -75,6 +76,7 @@ var GoCardlessApi = /** @class */ (function () {
         this.payment = new GoCardlessPaymentApi_1.GoCardlessPaymentApi(this);
         this.payout = new GoCardlessPayoutApi_1.GoCardlessPayoutApi(this);
         this.plan = new GoCardlessPlanApi_1.GoCardlessPlanApi(this);
+        this.redirectFlows = new GoCardlessRedirectFlowApi_1.GoCardlessRedirectFlowApi(this);
     };
     GoCardlessApi.prototype.generateSessionToken = function () {
         var dt = new Date().getTime();
