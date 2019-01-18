@@ -1,5 +1,6 @@
 import { GoCardlessApi } from "../GoCardlessApi";
-require("dotenv").config();
+import dotenv from "dot-env";
+dotenv.config();
 
 const apis = [
   { name: "customer", actions: ["create"] },

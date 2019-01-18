@@ -10,7 +10,7 @@
     "url": "https://github.com/CD2/co-cardless-js"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest --setupFiles dotenv/config"
   },
   "dependencies": {
     "@types/jest": "^23.3.12",
