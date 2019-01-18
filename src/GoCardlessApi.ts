@@ -7,6 +7,7 @@ import { GoCardlessMandateApi } from "./GoCardlessMandateApi";
 import { GoCardlessPaymentApi } from "./GoCardlessPaymentApi";
 import { GoCardlessPayoutApi } from "./GoCardlessPayoutApi";
 import { GoCardlessPlanApi } from "./GoCardlessPlanApi";
+import { GoCardlessRedirectFlowApi } from "./GoCardlessRedirectFlowApi";
 
 export type GoCardlessResponse = string | undefined;
 // docs = https://developer.gocardless.com/api-reference/#api-usage-making-requests
@@ -47,6 +48,7 @@ export class GoCardlessApi {
   payment!: GoCardlessPaymentApi;
   payout!: GoCardlessPayoutApi;
   plan!: GoCardlessPlanApi;
+  redirectFlows!: GoCardlessRedirectFlowApi;
 
   constructor(accessToken: string, sandbox = true) {
     this.sandbox = sandbox;
@@ -62,6 +64,7 @@ export class GoCardlessApi {
     this.payment = new GoCardlessPaymentApi(this);
     this.payout = new GoCardlessPayoutApi(this);
     this.plan = new GoCardlessPlanApi(this);
+    this.redirectFlows = new GoCardlessRedirectFlowApi(this);
   }
 
   generateSessionToken(): string {
