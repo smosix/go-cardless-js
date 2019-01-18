@@ -65,6 +65,7 @@ export class GoCardlessCustomerApi {
   }
 
   async create(customer: IGoCardlessCustomer): Promise<IGoCardlessApiCustomer> {
+    debugger;
     const {
       email,
       firstName,

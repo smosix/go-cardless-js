@@ -27,6 +27,11 @@ goCardlessApi.generateSessionToken(): string
 }
 ```
 
+### Testing!
+
+add to your .env the key
+GOCARDLESSS_SANDBOX_TEST_KEY= 'your sandbox go cardless token'
+
 ### Apis:
 
 ### Index Actions
