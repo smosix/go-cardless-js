@@ -42,12 +42,28 @@ goCardlessApi.bankAccount
 ### types
 
 ```javascript
-IGoCardlessBank = {
-  branchCode: string,
-  accountHolderName: string,
-  customerId: string,
-  currency: string,
-  accountNumber: string, // OR iban can be supplied instead
+interface IGoCardlessBank {
+  branchCode: string;
+  accountHolderName: string;
+  customerId: string;
+  currency: string;
+  accountNumber: string; // OR iban can be supplied instead
+}
+interface IGoCardlessApiBank {
+  id: string;
+  created_at: string;
+  account_holder_name: string;
+  account_number_ending: string;
+  country_code: string;
+  currency: string;
+  bank_name: string;
+  metadata: {
+    // returns whatever you sent up
+  };
+  enabled: boolean;
+  links: {
+    customer: string,
+  };
 }
 ```
 
@@ -62,22 +78,7 @@ goCardlessApi.bankAccount.index({
   before?: string;
   { [key: string]: string | number | undefined }
  }): Promise<{
-  customer_bank_accounts: {
-    id: string,
-    created_at: string,
-    account_holder_name: string,
-    account_number_ending: string,
-    country_code: string,
-    currency: string,
-    bank_name: string,
-    metadata: {
-      // returns whatever you sent up
-    };
-    enabled: boolean;
-    links: {
-      customer: string
-    }
-  }[]
+  customer_bank_accounts: IGoCardlessApiBank[]
 }>
 ```
 
@@ -85,22 +86,7 @@ goCardlessApi.bankAccount.index({
 
 ```javascript
 goCardlessApi.bankAccount.create(data: IGoCardlessBank): Promise<{
-  customer_bank_accounts: {
-    id: string,
-    created_at: string,
-    account_holder_name: string,
-    account_number_ending: string,
-    country_code: string,
-    currency: string,
-    bank_name: string,
-    metadata: {
-      // returns whatever you sent up
-    };
-    enabled: boolean;
-    links: {
-      customer: string
-    }
-  }
+  customer_bank_accounts: IGoCardlessApiBank
 }>
 ```
 
@@ -111,22 +97,7 @@ goCardlessApi.bankAccount.update(id: string, data?: {
   metadata: {
     [key:string]:any
   }): Promise<{
-  customer_bank_accounts: {
-    id: string,
-    created_at: string,
-    account_holder_name: string,
-    account_number_ending: string,
-    country_code: string,
-    currency: string,
-    bank_name: string,
-    metadata: {
-      // returns whatever you sent up
-    };
-    enabled: boolean;
-    links: {
-      customer: string
-    }
-  }
+  customer_bank_accounts: IGoCardlessApiBank
 }>
 ```
 
@@ -134,22 +105,7 @@ goCardlessApi.bankAccount.update(id: string, data?: {
 
 ```javascript
 goCardlessApi.bankAccount.find(id: string): Promise<{
-  customer_bank_accounts: {
-    id: string,
-    created_at: string,
-    account_holder_name: string,
-    account_number_ending: string,
-    country_code: string,
-    currency: string,
-    bank_name: string,
-    metadata: {
-      // returns whatever you sent up
-    };
-    enabled: boolean;
-    links: {
-      customer: string
-    }
-  }
+  customer_bank_accounts: IGoCardlessApiBank
 }>
 ```
 
@@ -157,22 +113,7 @@ goCardlessApi.bankAccount.find(id: string): Promise<{
 
 ```javascript
 goCardlessApi.bankAccount.disable(id: string): Promise<{
-  customer_bank_accounts: {
-    id: string,
-    created_at: string,
-    account_holder_name: string,
-    account_number_ending: string,
-    country_code: string,
-    currency: string,
-    bank_name: string,
-    metadata: {
-      // returns whatever you sent up
-    };
-    enabled: boolean;
-    links: {
-      customer: string
-    }
-  }
+  customer_bank_accounts: IGoCardlessApiBank
 }>
 ```
 
@@ -182,22 +123,7 @@ returns an array of bank accounts for a customer by the given customer id.
 
 ```javascript
 goCardlessApi.bankAccount.bankAccountForCustomerId(customerId: string): Promise<{
-  customer_bank_accounts: {
-    id: string,
-    created_at: string,
-    account_holder_name: string,
-    account_number_ending: string,
-    country_code: string,
-    currency: string,
-    bank_name: string,
-    metadata: {
-      // returns whatever you sent up
-    };
-    enabled: boolean;
-    links: {
-      customer: string
-    }
-  }[]
+  customer_bank_accounts: IGoCardlessApiBank[]
 }>
 ```
 
@@ -210,18 +136,41 @@ goCardlessApi.customer
 ### types
 
 ```javascript
-IGoCardlessCustomer {
-  email: string,
-  firstName: string,
-  lastName: string,
-  phone?: string,
-  addressLine1?: string,
-  addressLine2?: string,
-  addressLine3?: string,
-  city?: string,
-  country?: string,
-  postcode?: string,
-  metaData?: { [key: string]: string | number },
+interface IGoCardlessCustomer {
+  email: string;
+  firstName: string;
+  lastName: string;
+  phone?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  addressLine3?: string;
+  city?: string;
+  country?: string;
+  postcode?: string;
+  metaData?: { [key: string]: string | number };
+}
+interface IGoCardlessApiCustomer {
+    id: string
+    created_at: string
+    email: string
+    given_name: string
+    family_name: string
+    company_name: string
+    address_line1: string
+    address_line2: string
+    address_line3: string
+    city: string
+    region: string
+    postal_code: string
+    country_code: string
+    language: string
+    swedish_identity_number: string
+    danish_identity_number: string
+    phone_number: string
+    metadata: {
+      // any keys you sent up
+    }
+  }
 }
 ```
 
@@ -236,28 +185,7 @@ goCardlessApi.customer.index({
   before?: string;
   { [key: string]: string | number | undefined }
  }): Promise<{
-  customers: {
-    id: string
-    created_at: string
-    email: string
-    given_name: string
-    family_name: string
-    company_name: string
-    address_line1: string
-    address_line2: string
-    address_line3: string
-    city: string
-    region: string
-    postal_code: string
-    country_code: string
-    language: string
-    swedish_identity_number: string
-    danish_identity_number: string
-    phone_number: string
-    metadata: {
-      // any keys you sent up
-    }
-  }[]
+  customers: IGoCardlessApiCustomer[]
 }>
 ```
 
@@ -265,28 +193,7 @@ goCardlessApi.customer.index({
 
 ```javascript
 goCardlessApi.customer.create(data: IGoCardlessCustomer): Promise<{
-  customers: {
-    id: string
-    created_at: string
-    email: string
-    given_name: string
-    family_name: string
-    company_name: string
-    address_line1: string
-    address_line2: string
-    address_line3: string
-    city: string
-    region: string
-    postal_code: string
-    country_code: string
-    language: string
-    swedish_identity_number: string
-    danish_identity_number: string
-    phone_number: string
-    metadata: {
-      // any keys you sent up
-    }
-  }[]
+  customers: IGoCardlessApiCustomer
 }>
 ```
 
@@ -294,28 +201,7 @@ goCardlessApi.customer.create(data: IGoCardlessCustomer): Promise<{
 
 ```javascript
 goCardlessApi.customer.update(id: string, data: Partial<IGoCardlessCustomer>): Promise<{
-  customers: {
-    id: string
-    created_at: string
-    email: string
-    given_name: string
-    family_name: string
-    company_name: string
-    address_line1: string
-    address_line2: string
-    address_line3: string
-    city: string
-    region: string
-    postal_code: string
-    country_code: string
-    language: string
-    swedish_identity_number: string
-    danish_identity_number: string
-    phone_number: string
-    metadata: {
-      // any keys you sent up
-    }
-  }[]
+  customers: IGoCardlessApiCustomer
 }>
 ```
 
@@ -323,28 +209,7 @@ goCardlessApi.customer.update(id: string, data: Partial<IGoCardlessCustomer>): P
 
 ```javascript
 goCardlessApi.customer.update(id: string): Promise<{
-  customers: {
-    id: string
-    created_at: string
-    email: string
-    given_name: string
-    family_name: string
-    company_name: string
-    address_line1: string
-    address_line2: string
-    address_line3: string
-    city: string
-    region: string
-    postal_code: string
-    country_code: string
-    language: string
-    swedish_identity_number: string
-    danish_identity_number: string
-    phone_number: string
-    metadata: {
-      // any keys you sent up
-    }
-  }[]
+  customers: IGoCardlessApiCustomer
 }>
 ```
 
@@ -357,19 +222,33 @@ goCardlessApi.mandate
 ### types
 
 ```javascript
-IGoCardlessMandate = {
+interface IGoCardlessMandate {
   scheme:
-      | "autogiro"
-      | "bacs"
-      | "becs"
-      | "becs_nz"
-      | "betalingsservice"
-      | "sepa_core"
-      | "pad";
-    metadata?: Object;
-    customer_bank_account: string;
-    creditor?: string;
+    | "autogiro"
+    | "bacs"
+    | "becs"
+    | "becs_nz"
+    | "betalingsservice"
+    | "sepa_core"
+    | "pad";
+  metadata?: Object;
+  customer_bank_account: string;
+  creditor?: string;
 }
+interface IGoCardlessApiMandate {
+   id: string
+  created_at: string
+  reference: string
+  status: string
+  scheme: string
+  next_possible_charge_date: string
+  metadata: Object
+  links: {
+    customer_bank_account: string
+    creditor: string
+    customer: string
+  }
+  }
 ```
 
 #### Actions
@@ -383,20 +262,7 @@ goCardlessApi.mandate.index({
   before?: string;
   { [key: string]: string | number | undefined }
  }): Promise<{
-  mandates: {
-   id: string
-  created_at: string
-  reference: string
-  status: string
-  scheme: string
-  next_possible_charge_date: string
-  metadata: Object
-  links: {
-    customer_bank_account: string
-    creditor: string
-    customer: string
-  }
-  }[]
+  mandates: IGoCardlessApiMandate[]
 }>
 ```
 
@@ -404,20 +270,7 @@ create
 
 ```javascript
 goCardlessApi.mandate.create(data: IGoCardlessMandate): Promise<{
-    mandates: {
-      id: string
-      created_at: string
-      reference: string
-      status: string
-      scheme: string
-      next_possible_charge_date: string
-      metadata: Object
-      links: {
-        customer_bank_account: string
-        creditor: string
-        customer: string
-      }
-    }
+    mandates: IGoCardlessApiMandate
   }>
 ```
 
@@ -427,20 +280,7 @@ goCardlessApi.mandate.create(data: IGoCardlessMandate): Promise<{
 goCardlessApi.mandates.update(id: string, {
     metadata?: Object
   }): Promise<{
-    mandates: {
-      id: string
-      created_at: string
-      reference: string
-      status: string
-      scheme: string
-      next_possible_charge_date: string
-      metadata: Object
-      links: {
-        customer_bank_account: string
-        creditor: string
-        customer: string
-      }
-    }
+    mandates: IGoCardlessApiMandate
   }>
 ```
 
@@ -448,20 +288,7 @@ goCardlessApi.mandates.update(id: string, {
 
 ```javascript
 goCardlessApi.mandates.find(id: string): Promise<{
-    mandates: {
-      id: string
-      created_at: string
-      reference: string
-      status: string
-      scheme: string
-      next_possible_charge_date: string
-      metadata: Object
-      links: {
-        customer_bank_account: string
-        creditor: string
-        customer: string
-      }
-    }
+    mandates: IGoCardlessApiMandate
   }>
 ```
 
@@ -474,14 +301,29 @@ goCardlessApi.payment
 ### types
 
 ```javascript
-IGoCardlessPayment = {
-  amount: number, // must be greater than 0
-  currency: string,
-  charge_date: string,
-  reference?: string,
-  metadata?: Object,
-  mandateId: string,
+interface IGoCardlessPayment {
+  amount: number; // must be greater than 0
+  currency: string;
+  charge_date: string;
+  reference?: string;
+  metadata?: Object;
+  mandateId: string;
 }
+interface IGoCardlessApiPayment {
+    id: string
+    created_at: string
+    charge_date: string
+    amount: number
+    description: string
+    currency: string
+    status: string
+    reference: string
+    metadata: Object
+    amount_refunded: number
+    links: {
+      mandate: string
+      creditor: string
+    }
 
 ```
 
@@ -496,21 +338,7 @@ goCardlessApi.payment.index({
   before?: string;
   { [key: string]: string | number | undefined }
  }): Promise<{
-  payments: {
-    id: string
-    created_at: string
-    charge_date: string
-    amount: number
-    description: string
-    currency: string
-    status: string
-    reference: string
-    metadata: Object
-    amount_refunded: number
-    links: {
-      mandate: string
-      creditor: string
-    }}[]
+  payments: IGoCardlessApiPayment[]
 }>
 ```
 
@@ -518,21 +346,7 @@ goCardlessApi.payment.index({
 
 ```javascript
 goCardlessApi.payment.create(data: IGoCardlessPayment): Promise<{
-  payments: {
-    id: string
-    created_at: string
-    charge_date: string
-    amount: number
-    description: string
-    currency: string
-    status: string
-    reference: string
-    metadata: Object
-    amount_refunded: number
-    links: {
-      mandate: string
-      creditor: string
-    }}[]
+  payments: IGoCardlessApiPayment[]
 }>
 ```
 
@@ -542,21 +356,7 @@ goCardlessApi.payment.create(data: IGoCardlessPayment): Promise<{
 goCardlessApi.payment.create(id: string, {
   metadata: Object
 }): Promise<{
-  payments: {
-    id: string
-    created_at: string
-    charge_date: string
-    amount: number
-    description: string
-    currency: string
-    status: string
-    reference: string
-    metadata: Object
-    amount_refunded: number
-    links: {
-      mandate: string
-      creditor: string
-    }}[]
+  payments: IGoCardlessApiPayment[]
 }>
 ```
 
@@ -564,22 +364,7 @@ goCardlessApi.payment.create(id: string, {
 
 ```javascript
 goCardlessApi.payment.find(id: string): Promise<{
-  payments: {
-    id: string
-    created_at: string
-    charge_date: string
-    amount: number
-    description: string
-    currency: string
-    status: string
-    reference: string
-    metadata: Object
-    amount_refunded: number
-    links: {
-      mandate: string
-      creditor: string
-    }
-  }
+  payments: IGoCardlessApiPayment
 }>
 ```
 
@@ -589,22 +374,7 @@ goCardlessApi.payment.find(id: string): Promise<{
 goCardlessApi.payment.cancel(id: string, data?: {
   metadata: Object
 }): Promise<{
-  payments: {
-    id: string
-    created_at: string
-    charge_date: string
-    amount: number
-    description: string
-    currency: string
-    status: string
-    reference: string
-    metadata: Object
-    amount_refunded: number
-    links: {
-      mandate: string
-      creditor: string
-    }
-  }
+  payments: IGoCardlessApiPayment
 }>
 ```
 
@@ -614,22 +384,7 @@ goCardlessApi.payment.cancel(id: string, data?: {
 goCardlessApi.payment.retry(id: string, data?: {
   metadata: Object
 }): Promise<{
-  payments: {
-    id: string
-    created_at: string
-    charge_date: string
-    amount: number
-    description: string
-    currency: string
-    status: string
-    reference: string
-    metadata: Object
-    amount_refunded: number
-    links: {
-      mandate: string
-      creditor: string
-    }
-  }
+  payments: IGoCardlessApiPayment
 }>
 ```
 
@@ -696,7 +451,7 @@ goCardlessApi.plan
 ### types
 
 ```javascript
-IGoCardlessPlan = {
+interface IGoCardlessPlan {
   amount: number // must be greater than 0
   currency: string
   name?: string
@@ -705,6 +460,28 @@ IGoCardlessPlan = {
   metadata?: Object
   mandateId: string
 }
+interface IGoCardlessApiPlan {
+    id: string
+    created_at: string
+    amount: number
+    currency: string
+    status: string
+    name: string
+    start_date: string
+    end_date: GoCardlessResponse
+    interval: number
+    interval_unit: IGoCardlessPlanInterval
+    day_of_month: number
+    month: GoCardlessResponse
+    payment_reference: GoCardlessResponse
+    app_fee: string | number | null
+    upcoming_payments: { charge_date: string; amount: number }[]
+    metadata: {
+      order_no: string
+    }
+    links: {
+      mandate: string
+    }
 ```
 
 #### Actions
@@ -718,28 +495,7 @@ goCardlessApi.plan.index({
   before?: string;
   { [key: string]: string | number | undefined }
  }): Promise<{
-  subscriptions: {
-    id: string
-    created_at: string
-    amount: number
-    currency: string
-    status: string
-    name: string
-    start_date: string
-    end_date: GoCardlessResponse
-    interval: number
-    interval_unit: IGoCardlessPlanInterval
-    day_of_month: number
-    month: GoCardlessResponse
-    payment_reference: GoCardlessResponse
-    app_fee: string | number | null
-    upcoming_payments: { charge_date: string; amount: number }[]
-    metadata: {
-      order_no: string
-    }
-    links: {
-      mandate: string
-    }}[]
+  subscriptions: IGoCardlessApiPlan[]
 }>
 ```
 
@@ -747,29 +503,7 @@ goCardlessApi.plan.index({
 
 ```javascript
 goCardlessApi.plan.find(id: string): Promise<{
-  subscriptions: {
-    id: string
-    created_at: string
-    amount: number
-    currency: string
-    status: string
-    name: string
-    start_date: string
-    end_date: GoCardlessResponse
-    interval: number
-    interval_unit: IGoCardlessPlanInterval
-    day_of_month: number
-    month: GoCardlessResponse
-    payment_reference: GoCardlessResponse
-    app_fee: string | number | null
-    upcoming_payments: { charge_date: string; amount: number }[]
-    metadata: {
-      order_no: string
-    }
-    links: {
-      mandate: string
-    }
-  }
+  subscriptions: IGoCardlessApiPlan
 }>
 ```
 
@@ -809,21 +543,83 @@ goCardlessApi.plan.create(data: IGoCardlessPlan): Promise<{
 goCardlessApi.plan.cancel(id: string, data?: {
   metadata: Object
 }): Promise<{
-  subscriptions: {
-    id: string
-    created_at: string
-    charge_date: string
-    amount: number
-    description: string
-    currency: string
-    status: string
-    reference: string
-    metadata: Object
-    amount_refunded: number
-    links: {
-      mandate: string
-      creditor: string
-    }
-  }
+  subscriptions: IGoCardlessApiPlan
 }>
+```
+
+### Redirect Flows
+
+```javascript
+goCardlessApi.redirectFlows
+```
+
+### types
+
+```javascript
+interface IGoCardlessRedirectFlow {
+  session_token: string;
+  success_redirect_url: string;
+  description?: string;
+  prefilled_customer?: {
+    address_line1?: string;
+    address_line2?: string;
+    address_line3?: string;
+    city?: string;
+    company_name?: string;
+    country_code?: string;
+    danish_identity_number?: string;
+    email?: string;
+    family_name?: string;
+    given_name?: string;
+    language?: string;
+    phone_number?: string;
+    postal_code?: string;
+    region?: string;
+    swedish_identity_number?: string;
+  }
+  scheme?: string;
+  links?: {
+    creditor?: string;
+  }
+}
+interface IGoCardlessApiRedirectFlow {
+  id: string;
+  description: string;
+  session_token: string;
+  scheme: string;
+  success_redirect_url: string;
+  redirect_url: string;
+  created_at: string;
+  links: {
+    creditor: string;
+  };
+}
+```
+
+### Actions
+
+#### create
+
+```javascript
+goCardlessApi.redirectFlows.create(
+  redirect_flows: IGoCardlessRedirectFlow
+  ): Promise<{ redirect_flows: IGoCardlessApiRedirectFlow }>
+```
+
+#### complete
+
+```javascript
+goCardlessApi.redirectFlows.complete(
+    id: string,
+    redirect_flows: { session_token: string }
+  ): Promise<{ redirect_flows: IGoCardlessApiRedirectFlow }>
+```
+
+#### find
+
+```javascript
+goCardlessApi.redirectFlows.find(
+    id: string,
+    params?: { [key: string]: string | number | undefined }
+  ): Promise<{ redirect_flows: IGoCardlessApiRedirectFlow }>
 ```

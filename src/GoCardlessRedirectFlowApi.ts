@@ -20,11 +20,11 @@ export interface IGoCardlessRedirectFlow {
     postal_code?: string;
     region?: string;
     swedish_identity_number?: string;
-  }
+  };
   scheme?: string;
   links?: {
     creditor?: string;
-  }
+  };
 }
 
 export interface IGoCardlessApiRedirectFlow {
@@ -48,27 +48,34 @@ export class GoCardlessRedirectFlowApi {
 
   async create(
     redirect_flows: IGoCardlessRedirectFlow
-  ): Promise<{ manredirect_flowsdates: IGoCardlessApiRedirectFlow }> {
-    const { description, session_token, success_redirect_url, prefilled_customer, scheme, links } = redirect_flows;
+  ): Promise<{ redirect_flows: IGoCardlessApiRedirectFlow }> {
+    const {
+      description,
+      session_token,
+      success_redirect_url,
+      prefilled_customer,
+      scheme,
+      links
+    } = redirect_flows;
     return this.api.request("redirect_flows", "POST", {
       redirect_flows: {
-        description, 
-        session_token, 
-        success_redirect_url, 
-        prefilled_customer, 
-        scheme, 
+        description,
+        session_token,
+        success_redirect_url,
+        prefilled_customer,
+        scheme,
         links
       }
     });
   }
-  
+
   async complete(
     id: string,
     redirect_flows: { session_token: string }
   ): Promise<{ redirect_flows: IGoCardlessApiRedirectFlow }> {
     const { session_token } = redirect_flows;
     return this.api.request(`redirect_flows/${id}/actions/complete`, "POST", {
-      "data": {
+      data: {
         session_token
       }
     });
