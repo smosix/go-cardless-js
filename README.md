@@ -549,6 +549,8 @@ goCardlessApi.plan.cancel(id: string, data?: {
 
 ### Redirect Flows
 
+#### NOT YET PUBLISHED
+
 ```javascript
 goCardlessApi.redirectFlows
 ```
