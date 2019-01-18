@@ -5,13 +5,13 @@ export interface IGoCardlessCustomer {
   email: string;
   firstName: string;
   lastName: string;
-  phone: string;
-  addressLine1: string;
-  addressLine2: string;
-  addressLine3: string;
-  city: string;
-  country: string;
-  postcode: string;
+  phone?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  addressLine3?: string;
+  city?: string;
+  country?: string;
+  postcode?: string;
   metaData?: { [key: string]: string | number };
 }
 
@@ -93,7 +93,7 @@ export class GoCardlessCustomerApi {
   }
   async update(
     id: string,
-    customer: IGoCardlessCustomer
+    customer: Partial<IGoCardlessCustomer>
   ): Promise<{ customers: IGoCardlessApiCustomer }> {
     const {
       email,

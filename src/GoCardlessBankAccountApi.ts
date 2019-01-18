@@ -87,11 +87,10 @@ export class GoCardlessBankAccountApi {
   }
   async update(
     id: string,
-    bank: IGoCardlessBankUpdate
+    data?: IGoCardlessBankUpdate
   ): Promise<{ customer_bank_accounts: IGoCardlessApiBank }> {
-    const { metadata } = bank;
     return this.api.request(`customer_bank_accounts/${id}`, "PUT", {
-      customer_bank_accounts: { metadata }
+      customer_bank_accounts: data
     });
   }
 
