@@ -1,4 +1,5 @@
 import { GoCardlessApi, IndexRequestParams, urlParams } from "./GoCardlessApi";
+import { responseDeprecationWarning } from "./utils";
 
 interface IGoCardlessBankBase {
   branchCode: string;
@@ -60,9 +61,7 @@ export class GoCardlessBankAccountApi {
     return this.api.request(`customer_bank_accounts${urlParams(params)}`);
   }
 
-  async create(
-    bank: IGoCardlessBank
-  ): Promise<{ customer_bank_accounts: IGoCardlessApiBank }> {
+  async create(bank: IGoCardlessBank): Promise<IGoCardlessApiBank> {
     const {
       accountNumber,
       branchCode,
@@ -71,7 +70,8 @@ export class GoCardlessBankAccountApi {
       currency,
       metadata
     } = bank;
-    return this.api.request("customer_bank_accounts", "POST", {
+
+    const result = await this.api.request("customer_bank_accounts", "POST", {
       customer_bank_accounts: {
         account_number: accountNumber,
         branch_code: branchCode,
@@ -84,35 +84,61 @@ export class GoCardlessBankAccountApi {
         }
       }
     });
+    responseDeprecationWarning("customer_bank_accounts");
+    return ({
+      ...result.customer_bank_accounts,
+      customer_bank_accounts: result
+    } as any) as IGoCardlessApiBank;
   }
   async update(
     id: string,
     data?: IGoCardlessBankUpdate
-  ): Promise<{ customer_bank_accounts: IGoCardlessApiBank }> {
-    return this.api.request(`customer_bank_accounts/${id}`, "PUT", {
-      customer_bank_accounts: data
-    });
+  ): Promise<IGoCardlessApiBank> {
+    const result = await this.api.request(
+      `customer_bank_accounts/${id}`,
+      "PUT",
+      {
+        customer_bank_accounts: data
+      }
+    );
+    responseDeprecationWarning("customer_bank_accounts");
+    return ({
+      ...result.customer_bank_accounts,
+      customer_bank_accounts: result
+    } as any) as IGoCardlessApiBank;
   }
 
   async find(
     id: string,
     params?: { [key: string]: string | number | undefined }
-  ): Promise<{ customer_bank_accounts: IGoCardlessApiBank }> {
-    return this.api.request(`customer_bank_accounts/${id}${urlParams(params)}`);
+  ): Promise<IGoCardlessApiBank> {
+    const result = await this.api.request(
+      `customer_bank_accounts/${id}${urlParams(params)}`
+    );
+    responseDeprecationWarning("customer_bank_accounts");
+    return ({
+      ...result.customer_bank_accounts,
+      customer_bank_accounts: result
+    } as any) as IGoCardlessApiBank;
   }
 
-  async disable(
-    id: string
-  ): Promise<{ customer_bank_accounts: IGoCardlessApiBank }> {
-    return this.api.request(
+  async disable(id: string): Promise<IGoCardlessApiBank> {
+    const result = await this.api.request(
       `customer_bank_accounts/${id}/actions/disable`,
       "POST"
     );
+    responseDeprecationWarning("customer_bank_accounts");
+    return ({
+      ...result.customer_bank_accounts,
+      customer_bank_accounts: result
+    } as any) as IGoCardlessApiBank;
   }
 
   async bankAccountForCustomerId(
     customerId: string
   ): Promise<IGoCardlessIndexResponse> {
-    return this.api.request(`customer_bank_accounts?customer=${customerId}`);
+    return (this.api.request(
+      `customer_bank_accounts?customer=${customerId}`
+    ) as any) as IGoCardlessIndexResponse;
   }
 }

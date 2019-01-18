@@ -1,13 +1,35 @@
 import nodeFetch from "node-fetch";
 
 import { GoCardlessError, errors } from "./errors";
-import { GoCardlessBankAccountApi } from "./GoCardlessBankAccountApi";
-import { GoCardlessCustomerApi } from "./GoCardlessCustomerApi";
-import { GoCardlessMandateApi } from "./GoCardlessMandateApi";
-import { GoCardlessPaymentApi } from "./GoCardlessPaymentApi";
-import { GoCardlessPayoutApi } from "./GoCardlessPayoutApi";
-import { GoCardlessPlanApi } from "./GoCardlessPlanApi";
-import { GoCardlessRedirectFlowApi } from "./GoCardlessRedirectFlowApi";
+import {
+  GoCardlessBankAccountApi,
+  IGoCardlessApiBank
+} from "./GoCardlessBankAccountApi";
+import {
+  GoCardlessCustomerApi,
+  IGoCardlessApiCustomer
+} from "./GoCardlessCustomerApi";
+import {
+  GoCardlessMandateApi,
+  IGoCardlessApiMandate
+} from "./GoCardlessMandateApi";
+import {
+  GoCardlessPaymentApi,
+  IGoCardlessApiPayment
+} from "./GoCardlessPaymentApi";
+import {
+  GoCardlessPayoutApi,
+  IGoCardlessApiPayout
+} from "./GoCardlessPayoutApi";
+import { GoCardlessPlanApi, IGoCardlessApiPlan } from "./GoCardlessPlanApi";
+import {
+  GoCardlessSubscriptionApi,
+  IGoCardlessApiSubscription
+} from "./GoCardlessSubscriptionApi";
+import {
+  GoCardlessRedirectFlowApi,
+  IGoCardlessApiRedirectFlow
+} from "./GoCardlessRedirectFlowApi";
 
 export type GoCardlessResponse = string | undefined;
 // docs = https://developer.gocardless.com/api-reference/#api-usage-making-requests
@@ -48,6 +70,7 @@ export class GoCardlessApi {
   payment!: GoCardlessPaymentApi;
   payout!: GoCardlessPayoutApi;
   plan!: GoCardlessPlanApi;
+  subscription!: GoCardlessSubscriptionApi;
   redirectFlows!: GoCardlessRedirectFlowApi;
 
   constructor(accessToken: string, sandbox = true) {
@@ -64,6 +87,7 @@ export class GoCardlessApi {
     this.payment = new GoCardlessPaymentApi(this);
     this.payout = new GoCardlessPayoutApi(this);
     this.plan = new GoCardlessPlanApi(this);
+    this.subscription = new GoCardlessSubscriptionApi(this);
     this.redirectFlows = new GoCardlessRedirectFlowApi(this);
   }
 

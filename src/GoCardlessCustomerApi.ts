@@ -1,11 +1,16 @@
 import { IndexRequestParams, urlParams } from "./GoCardlessApi";
 import nodeFetch from "node-fetch";
 import { GoCardlessApi } from "./GoCardlessApi";
+import {
+  attributeDeprecationWarning,
+  responseDeprecationWarning
+} from "./utils";
 export interface IGoCardlessCustomer {
   email: string;
   firstName: string;
   lastName: string;
   phone?: string;
+  phoneNumber?: string;
   addressLine1?: string;
   addressLine2?: string;
   addressLine3?: string;
@@ -59,9 +64,7 @@ export class GoCardlessCustomerApi {
     return this.api.request(`customers${urlParams(params)}`);
   }
 
-  async create(
-    customer: IGoCardlessCustomer
-  ): Promise<{ customers: IGoCardlessApiCustomer }> {
+  async create(customer: IGoCardlessCustomer): Promise<IGoCardlessApiCustomer> {
     const {
       email,
       firstName,
@@ -72,10 +75,11 @@ export class GoCardlessCustomerApi {
       city,
       postcode,
       metaData,
-      phone
+      phone,
+      phoneNumber
     } = customer;
-
-    return this.api.request("customers", "POST", {
+    attributeDeprecationWarning(phone, "phone", "phoneNumber");
+    const result = await this.api.request("customers", "POST", {
       customers: {
         email: email,
         given_name: firstName,
@@ -87,14 +91,16 @@ export class GoCardlessCustomerApi {
         postal_code: postcode,
         country_code: "GB",
         metadata: metaData,
-        phone_number: phone
+        phone_number: phoneNumber || phone
       }
     });
+    responseDeprecationWarning("customers");
+    return ({ ...result, customers: result } as any) as IGoCardlessApiCustomer;
   }
   async update(
     id: string,
     customer: Partial<IGoCardlessCustomer>
-  ): Promise<{ customers: IGoCardlessApiCustomer }> {
+  ): Promise<IGoCardlessApiCustomer> {
     const {
       email,
       firstName,
@@ -105,9 +111,12 @@ export class GoCardlessCustomerApi {
       city,
       postcode,
       metaData,
-      phone
+      phone,
+      phoneNumber
     } = customer;
-    return this.api.request("customers" + `/${id}`, "PUT", {
+    attributeDeprecationWarning(phone, "phone", "phoneNumber");
+
+    const result = await this.api.request("customers" + `/${id}`, "PUT", {
       customers: {
         email: email,
         given_name: firstName,
@@ -119,15 +128,27 @@ export class GoCardlessCustomerApi {
         postal_code: postcode,
         country_code: "GB",
         metadata: metaData,
-        phone_number: phone
+        phone_number: phoneNumber || phone
       }
     });
+    responseDeprecationWarning("customers");
+    return ({
+      ...result.customers,
+      customers: result
+    } as any) as IGoCardlessApiCustomer;
   }
 
   async find(
     id: string,
     params?: { [key: string]: string | number | undefined }
-  ): Promise<{ customers: IGoCardlessApiCustomer }> {
-    return this.api.request("customers" + `/${id}${urlParams(params)}`);
+  ): Promise<IGoCardlessApiCustomer> {
+    const result = await this.api.request(
+      "customers" + `/${id}${urlParams(params)}`
+    );
+    responseDeprecationWarning("customers");
+    return ({
+      ...result.customers,
+      customers: result
+    } as any) as IGoCardlessApiCustomer;
   }
 }

@@ -1,25 +1,20 @@
 import { GoCardlessApi, IndexRequestParams, urlParams } from "./GoCardlessApi";
-import {
-  attributeDeprecationWarning,
-  apiDeprecationWarning,
-  responseDeprecationWarning
-} from "./utils";
 
-export type IGoCardlessPlanInterval = "weekly" | "monthly" | "yearly";
-export interface IGoCardlessPlan {
+export type IGoCardlessSubscriptionInterval = "weekly" | "monthly" | "yearly";
+export interface IGoCardlessSubscription {
   month?: string;
   dayOfMonth?: string;
   startDate?: string;
   amount: number;
   currency: string;
   name: string;
-  intervalUnit: IGoCardlessPlanInterval;
+  intervalUnit: IGoCardlessSubscriptionInterval;
   count: number;
   metadata?: Object;
   mandateId: string;
 }
 
-export interface IGoCardlessApiPlan {
+export interface IGoCardlessApiSubscription {
   id: string;
   created_at: string;
   amount: number;
@@ -29,7 +24,7 @@ export interface IGoCardlessApiPlan {
   start_date: string;
   end_date: string;
   interval: number;
-  interval_unit: IGoCardlessPlanInterval;
+  interval_unit: IGoCardlessSubscriptionInterval;
   day_of_month: number;
   month: string;
   payment_reference: string;
@@ -44,7 +39,7 @@ export interface IGoCardlessApiPlan {
 }
 
 interface IGoCardlessIndexResponse {
-  subscriptions: IGoCardlessApiPlan[];
+  subscriptions: IGoCardlessApiSubscription[];
   meta: {
     cursors: {
       before: string;
@@ -54,10 +49,9 @@ interface IGoCardlessIndexResponse {
   };
 }
 
-export class GoCardlessPlanApi {
+export class GoCardlessSubscriptionApi {
   api: GoCardlessApi;
   constructor(api: GoCardlessApi) {
-    apiDeprecationWarning("plan", "subscription");
     this.api = api;
   }
 
@@ -70,18 +64,16 @@ export class GoCardlessPlanApi {
   async find(
     id: string,
     params?: { [key: string]: string | number | undefined }
-  ): Promise<IGoCardlessApiPlan> {
+  ): Promise<{ subscriptions: IGoCardlessApiSubscription }> {
     const result = await this.api.request(
       `subscriptions/${id}${urlParams(params)}`
     );
-    responseDeprecationWarning("subscriptions");
-    return ({
-      ...result.subscriptions,
-      subscriptions: result
-    } as any) as IGoCardlessApiPlan;
+    return { ...result.subscriptions };
   }
 
-  async create(plan: IGoCardlessPlan): Promise<IGoCardlessApiPlan> {
+  async create(
+    Subscription: IGoCardlessSubscription
+  ): Promise<{ subscriptions: IGoCardlessApiSubscription }> {
     const {
       amount,
       currency,
@@ -93,7 +85,7 @@ export class GoCardlessPlanApi {
       month,
       startDate,
       dayOfMonth
-    } = plan;
+    } = Subscription;
     const result = await this.api.request("subscriptions", "POST", {
       subscriptions: {
         start_date: startDate,
@@ -110,26 +102,18 @@ export class GoCardlessPlanApi {
         }
       }
     });
-    responseDeprecationWarning("subscriptions");
-    return ({
-      ...result.subscriptions,
-      subscriptions: result
-    } as any) as IGoCardlessApiPlan;
+    return { ...result.subscriptions };
   }
 
   async cancel(
     id: string,
     data?: { metadata: Object }
-  ): Promise<IGoCardlessApiPlan> {
+  ): Promise<{ subscriptions: IGoCardlessApiSubscription }> {
     const result = await this.api.request(
       `subscriptions/${id}/actions/cancel`,
       "POST",
       data
     );
-    responseDeprecationWarning("subscriptions");
-    return ({
-      ...result.subscriptions,
-      subscriptions: result
-    } as any) as IGoCardlessApiPlan;
+    return { ...result.subscriptions };
   }
 }

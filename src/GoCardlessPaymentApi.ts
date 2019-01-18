@@ -1,4 +1,5 @@
 import { GoCardlessApi, IndexRequestParams, urlParams } from "./GoCardlessApi";
+import { responseDeprecationWarning } from "./utils";
 
 export interface IGoCardlessPayment {
   amount: number;
@@ -49,9 +50,7 @@ export class GoCardlessPaymentApi {
     return this.api.request(`payments${urlParams(params)}`);
   }
 
-  async create(
-    payment: IGoCardlessPayment
-  ): Promise<{ payments: IGoCardlessApiPayment }> {
+  async create(payment: IGoCardlessPayment): Promise<IGoCardlessApiPayment> {
     const {
       amount,
       currency,
@@ -60,7 +59,7 @@ export class GoCardlessPaymentApi {
       metadata,
       mandateId
     } = payment;
-    return this.api.request("payments", "POST", {
+    const result = await this.api.request("payments", "POST", {
       payments: {
         amount,
         currency,
@@ -72,37 +71,70 @@ export class GoCardlessPaymentApi {
         }
       }
     });
+    responseDeprecationWarning("payments");
+    return ({
+      ...result.payments,
+      payments: result
+    } as any) as IGoCardlessApiPayment;
   }
   async update(
     id: string,
     payment: { metadata: Object }
-  ): Promise<{ payments: IGoCardlessApiPayment }> {
+  ): Promise<IGoCardlessApiPayment> {
     const { metadata } = payment;
-    return this.api.request(`payments/${id}`, "PUT", {
+    const result = await this.api.request(`payments/${id}`, "PUT", {
       payments: {
         metadata
       }
     });
+    responseDeprecationWarning("mandates");
+    return ({
+      ...result.payments,
+      payments: result
+    } as any) as IGoCardlessApiPayment;
   }
 
   async find(
     id: string,
     params?: { [key: string]: string | number | undefined }
-  ): Promise<{ payments: IGoCardlessApiPayment }> {
-    return this.api.request(`payments/${id}${urlParams(params)}`);
+  ): Promise<IGoCardlessApiPayment> {
+    const result = await this.api.request(`payments/${id}${urlParams(params)}`);
+    responseDeprecationWarning("payments");
+    return ({
+      ...result.payments,
+      payments: result
+    } as any) as IGoCardlessApiPayment;
   }
 
   async cancel(
     id: string,
     data?: { metadata: Object }
-  ): Promise<{ payments: IGoCardlessApiPayment }> {
-    return this.api.request(`payments/${id}/actions/cancel`, "POST", data);
+  ): Promise<IGoCardlessApiPayment> {
+    const result = await this.api.request(
+      `payments/${id}/actions/cancel`,
+      "POST",
+      data
+    );
+    responseDeprecationWarning("payments");
+    return ({
+      ...result.payments,
+      payments: result
+    } as any) as IGoCardlessApiPayment;
   }
 
   async retry(
     id: string,
     data?: { metadata: Object }
-  ): Promise<{ payments: IGoCardlessApiPayment }> {
-    return this.api.request(`payments/${id}/actions/retry`, "POST", data);
+  ): Promise<IGoCardlessApiPayment> {
+    const result = await this.api.request(
+      `payments/${id}/actions/retry`,
+      "POST",
+      data
+    );
+    responseDeprecationWarning("payments");
+    return ({
+      ...result.payments,
+      payments: result
+    } as any) as IGoCardlessApiPayment;
   }
 }

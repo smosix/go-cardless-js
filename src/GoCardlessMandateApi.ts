@@ -1,4 +1,5 @@
 import { GoCardlessApi, urlParams, IndexRequestParams } from "./GoCardlessApi";
+import { responseDeprecationWarning } from "./utils";
 
 export interface IGoCardlessMandate {
   scheme:
@@ -52,11 +53,9 @@ export class GoCardlessMandateApi {
     return this.api.request(`mandates${urlParams(params)}`);
   }
 
-  async create(
-    mandate: IGoCardlessMandate
-  ): Promise<{ mandates: IGoCardlessApiMandate }> {
+  async create(mandate: IGoCardlessMandate): Promise<IGoCardlessApiMandate> {
     const { scheme, metadata, customer_bank_account, creditor } = mandate;
-    return this.api.request("mandates", "POST", {
+    const result = await this.api.request("mandates", "POST", {
       mandates: {
         scheme,
         metadata,
@@ -66,23 +65,38 @@ export class GoCardlessMandateApi {
         }
       }
     });
+    responseDeprecationWarning("mandates");
+    return ({
+      ...result.mandates,
+      mandates: result
+    } as any) as IGoCardlessApiMandate;
   }
   async update(
     id: string,
     mandate: { metadata: Object }
-  ): Promise<{ mandates: IGoCardlessApiMandate }> {
+  ): Promise<IGoCardlessApiMandate> {
     const { metadata } = mandate;
-    return this.api.request(`mandates/${id}`, "PUT", {
+    const result = await this.api.request(`mandates/${id}`, "PUT", {
       mandates: {
         metadata
       }
     });
+    responseDeprecationWarning("mandates");
+    return ({
+      ...result.mandates,
+      mandates: result
+    } as any) as IGoCardlessApiMandate;
   }
 
   async find(
     id: string,
     params?: { [key: string]: string | number | undefined }
-  ): Promise<{ mandates: IGoCardlessApiMandate }> {
-    return this.api.request(`mandates/${id}${urlParams(params)}`);
+  ): Promise<IGoCardlessApiMandate> {
+    const result = await this.api.request(`mandates/${id}${urlParams(params)}`);
+    responseDeprecationWarning("mandates");
+    return ({
+      ...result.mandates,
+      mandates: result
+    } as any) as IGoCardlessApiMandate;
   }
 }

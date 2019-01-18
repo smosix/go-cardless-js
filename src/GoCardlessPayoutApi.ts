@@ -1,4 +1,5 @@
 import { GoCardlessApi, IndexRequestParams, urlParams } from "./GoCardlessApi";
+import { responseDeprecationWarning } from "./utils";
 
 export interface IGoCardlessApiPayout {
   id: string;
@@ -41,7 +42,12 @@ export class GoCardlessPayoutApi {
   async find(
     id: string,
     params?: { [key: string]: string | number | undefined }
-  ): Promise<{ payouts: IGoCardlessApiPayout }> {
-    return this.api.request(`payouts/${id}${urlParams(params)}`);
+  ): Promise<IGoCardlessApiPayout> {
+    const result = await this.api.request(`payouts/${id}${urlParams(params)}`);
+    responseDeprecationWarning("payouts");
+    return ({
+      ...result.payouts,
+      payouts: result
+    } as any) as IGoCardlessApiPayout;
   }
 }
