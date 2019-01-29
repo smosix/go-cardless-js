@@ -31,8 +31,6 @@ export declare class GoCardlessPayoutApi {
     }): Promise<IGoCardlessIndexResponse>;
     find(id: string, params?: {
         [key: string]: string | number | undefined;
-    }): Promise<{
-        payouts: IGoCardlessApiPayout;
-    }>;
+    }): Promise<IGoCardlessApiPayout>;
 }
 export {};

@@ -1,18 +1,18 @@
 import { GoCardlessApi, IndexRequestParams } from "./GoCardlessApi";
-export declare type IGoCardlessPlanInterval = "weekly" | "monthly" | "yearly";
-export interface IGoCardlessPlan {
+export declare type IGoCardlessSubscriptionInterval = "weekly" | "monthly" | "yearly";
+export interface IGoCardlessSubscription {
     month?: string;
     dayOfMonth?: string;
     startDate?: string;
     amount: number;
     currency: string;
     name: string;
-    intervalUnit: IGoCardlessPlanInterval;
+    intervalUnit: IGoCardlessSubscriptionInterval;
     count: number;
     metadata?: Object;
     mandateId: string;
 }
-export interface IGoCardlessApiPlan {
+export interface IGoCardlessApiSubscription {
     id: string;
     created_at: string;
     amount: number;
@@ -22,7 +22,7 @@ export interface IGoCardlessApiPlan {
     start_date: string;
     end_date: string;
     interval: number;
-    interval_unit: IGoCardlessPlanInterval;
+    interval_unit: IGoCardlessSubscriptionInterval;
     day_of_month: number;
     month: string;
     payment_reference: string;
@@ -39,7 +39,7 @@ export interface IGoCardlessApiPlan {
     };
 }
 interface IGoCardlessIndexResponse {
-    subscriptions: IGoCardlessApiPlan[];
+    subscriptions: IGoCardlessApiSubscription[];
     meta: {
         cursors: {
             before: string;
@@ -48,7 +48,7 @@ interface IGoCardlessIndexResponse {
         limit: number;
     };
 }
-export declare class GoCardlessPlanApi {
+export declare class GoCardlessSubscriptionApi {
     api: GoCardlessApi;
     constructor(api: GoCardlessApi);
     index(params?: IndexRequestParams | {
@@ -56,10 +56,16 @@ export declare class GoCardlessPlanApi {
     }): Promise<IGoCardlessIndexResponse>;
     find(id: string, params?: {
         [key: string]: string | number | undefined;
-    }): Promise<IGoCardlessApiPlan>;
-    create(plan: IGoCardlessPlan): Promise<IGoCardlessApiPlan>;
+    }): Promise<{
+        subscriptions: IGoCardlessApiSubscription;
+    }>;
+    create(Subscription: IGoCardlessSubscription): Promise<{
+        subscriptions: IGoCardlessApiSubscription;
+    }>;
     cancel(id: string, data?: {
         metadata: Object;
-    }): Promise<IGoCardlessApiPlan>;
+    }): Promise<{
+        subscriptions: IGoCardlessApiSubscription;
+    }>;
 }
 export {};

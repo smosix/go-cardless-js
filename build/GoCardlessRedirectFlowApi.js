@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -47,32 +36,48 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var GoCardlessApi_1 = require("./GoCardlessApi");
-var utils_1 = require("./utils");
-var GoCardlessPayoutApi = /** @class */ (function () {
-    function GoCardlessPayoutApi(api) {
+var GoCardlessRedirectFlowApi = /** @class */ (function () {
+    function GoCardlessRedirectFlowApi(api) {
         this.api = api;
     }
-    GoCardlessPayoutApi.prototype.index = function (params) {
+    GoCardlessRedirectFlowApi.prototype.create = function (redirect_flows) {
         return __awaiter(this, void 0, void 0, function () {
+            var description, session_token, success_redirect_url, prefilled_customer, scheme, links;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("payouts" + GoCardlessApi_1.urlParams(params))];
+                description = redirect_flows.description, session_token = redirect_flows.session_token, success_redirect_url = redirect_flows.success_redirect_url, prefilled_customer = redirect_flows.prefilled_customer, scheme = redirect_flows.scheme, links = redirect_flows.links;
+                return [2 /*return*/, this.api.request("redirect_flows", "POST", {
+                        redirect_flows: {
+                            description: description,
+                            session_token: session_token,
+                            success_redirect_url: success_redirect_url,
+                            prefilled_customer: prefilled_customer,
+                            scheme: scheme,
+                            links: links
+                        }
+                    })];
             });
         });
     };
-    GoCardlessPayoutApi.prototype.find = function (id, params) {
+    GoCardlessRedirectFlowApi.prototype.complete = function (id, redirect_flows) {
         return __awaiter(this, void 0, void 0, function () {
-            var result;
+            var session_token;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.api.request("payouts/" + id + GoCardlessApi_1.urlParams(params))];
-                    case 1:
-                        result = _a.sent();
-                        utils_1.responseDeprecationWarning("payouts");
-                        return [2 /*return*/, __assign({}, result.payouts, { payouts: result })];
-                }
+                session_token = redirect_flows.session_token;
+                return [2 /*return*/, this.api.request("redirect_flows/" + id + "/actions/complete", "POST", {
+                        data: {
+                            session_token: session_token
+                        }
+                    })];
             });
         });
     };
-    return GoCardlessPayoutApi;
+    GoCardlessRedirectFlowApi.prototype.find = function (id, params) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.api.request("redirect_flows/" + id + GoCardlessApi_1.urlParams(params))];
+            });
+        });
+    };
+    return GoCardlessRedirectFlowApi;
 }());
-exports.GoCardlessPayoutApi = GoCardlessPayoutApi;
+exports.GoCardlessRedirectFlowApi = GoCardlessRedirectFlowApi;

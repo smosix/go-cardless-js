@@ -47,32 +47,73 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var GoCardlessApi_1 = require("./GoCardlessApi");
-var utils_1 = require("./utils");
-var GoCardlessPayoutApi = /** @class */ (function () {
-    function GoCardlessPayoutApi(api) {
+var GoCardlessSubscriptionApi = /** @class */ (function () {
+    function GoCardlessSubscriptionApi(api) {
         this.api = api;
     }
-    GoCardlessPayoutApi.prototype.index = function (params) {
+    GoCardlessSubscriptionApi.prototype.index = function (params) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("payouts" + GoCardlessApi_1.urlParams(params))];
+                return [2 /*return*/, this.api.request("subscriptions" + GoCardlessApi_1.urlParams(params))];
             });
         });
     };
-    GoCardlessPayoutApi.prototype.find = function (id, params) {
+    GoCardlessSubscriptionApi.prototype.find = function (id, params) {
         return __awaiter(this, void 0, void 0, function () {
             var result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.api.request("payouts/" + id + GoCardlessApi_1.urlParams(params))];
+                    case 0: return [4 /*yield*/, this.api.request("subscriptions/" + id + GoCardlessApi_1.urlParams(params))];
                     case 1:
                         result = _a.sent();
-                        utils_1.responseDeprecationWarning("payouts");
-                        return [2 /*return*/, __assign({}, result.payouts, { payouts: result })];
+                        return [2 /*return*/, __assign({}, result.subscriptions)];
                 }
             });
         });
     };
-    return GoCardlessPayoutApi;
+    GoCardlessSubscriptionApi.prototype.create = function (Subscription) {
+        return __awaiter(this, void 0, void 0, function () {
+            var amount, currency, name, intervalUnit, metadata, mandateId, count, month, startDate, dayOfMonth, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        amount = Subscription.amount, currency = Subscription.currency, name = Subscription.name, intervalUnit = Subscription.intervalUnit, metadata = Subscription.metadata, mandateId = Subscription.mandateId, count = Subscription.count, month = Subscription.month, startDate = Subscription.startDate, dayOfMonth = Subscription.dayOfMonth;
+                        return [4 /*yield*/, this.api.request("subscriptions", "POST", {
+                                subscriptions: {
+                                    start_date: startDate,
+                                    day_of_month: dayOfMonth,
+                                    month: month,
+                                    amount: amount,
+                                    currency: currency,
+                                    name: name,
+                                    interval_unit: intervalUnit,
+                                    metadata: metadata,
+                                    count: count,
+                                    links: {
+                                        mandate: mandateId
+                                    }
+                                }
+                            })];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, __assign({}, result.subscriptions)];
+                }
+            });
+        });
+    };
+    GoCardlessSubscriptionApi.prototype.cancel = function (id, data) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.api.request("subscriptions/" + id + "/actions/cancel", "POST", data)];
+                    case 1:
+                        result = _a.sent();
+                        return [2 /*return*/, __assign({}, result.subscriptions)];
+                }
+            });
+        });
+    };
+    return GoCardlessSubscriptionApi;
 }());
-exports.GoCardlessPayoutApi = GoCardlessPayoutApi;
+exports.GoCardlessSubscriptionApi = GoCardlessSubscriptionApi;

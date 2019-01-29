@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -36,6 +47,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var GoCardlessApi_1 = require("./GoCardlessApi");
+var utils_1 = require("./utils");
 var GoCardlessMandateApi = /** @class */ (function () {
     function GoCardlessMandateApi(api) {
         this.api = api;
@@ -49,39 +61,60 @@ var GoCardlessMandateApi = /** @class */ (function () {
     };
     GoCardlessMandateApi.prototype.create = function (mandate) {
         return __awaiter(this, void 0, void 0, function () {
-            var scheme, metadata, customer_bank_account, creditor;
+            var scheme, metadata, customer_bank_account, creditor, result;
             return __generator(this, function (_a) {
-                scheme = mandate.scheme, metadata = mandate.metadata, customer_bank_account = mandate.customer_bank_account, creditor = mandate.creditor;
-                return [2 /*return*/, this.api.request("mandates", "POST", {
-                        mandates: {
-                            scheme: scheme,
-                            metadata: metadata,
-                            links: {
-                                customer_bank_account: customer_bank_account,
-                                creditor: creditor //TODO SET THIS TO WHOMEVER NEEDS PAYING
-                            }
-                        }
-                    })];
+                switch (_a.label) {
+                    case 0:
+                        scheme = mandate.scheme, metadata = mandate.metadata, customer_bank_account = mandate.customer_bank_account, creditor = mandate.creditor;
+                        return [4 /*yield*/, this.api.request("mandates", "POST", {
+                                mandates: {
+                                    scheme: scheme,
+                                    metadata: metadata,
+                                    links: {
+                                        customer_bank_account: customer_bank_account,
+                                        creditor: creditor //TODO SET THIS TO WHOMEVER NEEDS PAYING
+                                    }
+                                }
+                            })];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("mandates");
+                        return [2 /*return*/, __assign({}, result.mandates, { mandates: result })];
+                }
             });
         });
     };
     GoCardlessMandateApi.prototype.update = function (id, mandate) {
         return __awaiter(this, void 0, void 0, function () {
-            var metadata;
+            var metadata, result;
             return __generator(this, function (_a) {
-                metadata = mandate.metadata;
-                return [2 /*return*/, this.api.request("mandates/" + id, "PUT", {
-                        mandates: {
-                            metadata: metadata
-                        }
-                    })];
+                switch (_a.label) {
+                    case 0:
+                        metadata = mandate.metadata;
+                        return [4 /*yield*/, this.api.request("mandates/" + id, "PUT", {
+                                mandates: {
+                                    metadata: metadata
+                                }
+                            })];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("mandates");
+                        return [2 /*return*/, __assign({}, result.mandates, { mandates: result })];
+                }
             });
         });
     };
     GoCardlessMandateApi.prototype.find = function (id, params) {
         return __awaiter(this, void 0, void 0, function () {
+            var result;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("mandates/" + id + GoCardlessApi_1.urlParams(params))];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.api.request("mandates/" + id + GoCardlessApi_1.urlParams(params))];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("mandates");
+                        return [2 /*return*/, __assign({}, result.mandates, { mandates: result })];
+                }
             });
         });
     };

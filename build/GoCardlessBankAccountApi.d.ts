@@ -48,20 +48,12 @@ export declare class GoCardlessBankAccountApi {
     index(params?: IndexRequestParams | {
         [key: string]: string | number | undefined;
     }): Promise<IGoCardlessIndexResponse>;
-    create(bank: IGoCardlessBank): Promise<{
-        customer_bank_accounts: IGoCardlessApiBank;
-    }>;
-    update(id: string, bank: IGoCardlessBankUpdate): Promise<{
-        customer_bank_accounts: IGoCardlessApiBank;
-    }>;
+    create(bank: IGoCardlessBank): Promise<IGoCardlessApiBank>;
+    update(id: string, data?: IGoCardlessBankUpdate): Promise<IGoCardlessApiBank>;
     find(id: string, params?: {
         [key: string]: string | number | undefined;
-    }): Promise<{
-        customer_bank_accounts: IGoCardlessApiBank;
-    }>;
-    disable(id: string): Promise<{
-        customer_bank_accounts: IGoCardlessApiBank;
-    }>;
+    }): Promise<IGoCardlessApiBank>;
+    disable(id: string): Promise<IGoCardlessApiBank>;
     bankAccountForCustomerId(customerId: string): Promise<IGoCardlessIndexResponse>;
 }
 export {};

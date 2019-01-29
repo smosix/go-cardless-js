@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -36,6 +47,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var GoCardlessApi_1 = require("./GoCardlessApi");
+var utils_1 = require("./utils");
 var GoCardlessBankAccountApi = /** @class */ (function () {
     function GoCardlessBankAccountApi(api) {
         this.api = api;
@@ -49,47 +61,73 @@ var GoCardlessBankAccountApi = /** @class */ (function () {
     };
     GoCardlessBankAccountApi.prototype.create = function (bank) {
         return __awaiter(this, void 0, void 0, function () {
-            var accountNumber, branchCode, accountHolderName, customerId, currency, metadata;
+            var accountNumber, branchCode, accountHolderName, customerId, currency, metadata, result;
             return __generator(this, function (_a) {
-                accountNumber = bank.accountNumber, branchCode = bank.branchCode, accountHolderName = bank.accountHolderName, customerId = bank.customerId, currency = bank.currency, metadata = bank.metadata;
-                return [2 /*return*/, this.api.request("customer_bank_accounts", "POST", {
-                        customer_bank_accounts: {
-                            account_number: accountNumber,
-                            branch_code: branchCode,
-                            account_holder_name: accountHolderName,
-                            country_code: "GB",
-                            currency: currency,
-                            metadata: metadata,
-                            links: {
-                                customer: customerId
-                            }
-                        }
-                    })];
+                switch (_a.label) {
+                    case 0:
+                        accountNumber = bank.accountNumber, branchCode = bank.branchCode, accountHolderName = bank.accountHolderName, customerId = bank.customerId, currency = bank.currency, metadata = bank.metadata;
+                        return [4 /*yield*/, this.api.request("customer_bank_accounts", "POST", {
+                                customer_bank_accounts: {
+                                    account_number: accountNumber,
+                                    branch_code: branchCode,
+                                    account_holder_name: accountHolderName,
+                                    country_code: "GB",
+                                    currency: currency,
+                                    metadata: metadata,
+                                    links: {
+                                        customer: customerId
+                                    }
+                                }
+                            })];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("customer_bank_accounts");
+                        return [2 /*return*/, __assign({}, result.customer_bank_accounts, { customer_bank_accounts: result })];
+                }
             });
         });
     };
-    GoCardlessBankAccountApi.prototype.update = function (id, bank) {
+    GoCardlessBankAccountApi.prototype.update = function (id, data) {
         return __awaiter(this, void 0, void 0, function () {
-            var metadata;
+            var result;
             return __generator(this, function (_a) {
-                metadata = bank.metadata;
-                return [2 /*return*/, this.api.request("customer_bank_accounts/" + id, "PUT", {
-                        customer_bank_accounts: { metadata: metadata }
-                    })];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.api.request("customer_bank_accounts/" + id, "PUT", {
+                            customer_bank_accounts: data
+                        })];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("customer_bank_accounts");
+                        return [2 /*return*/, __assign({}, result.customer_bank_accounts, { customer_bank_accounts: result })];
+                }
             });
         });
     };
     GoCardlessBankAccountApi.prototype.find = function (id, params) {
         return __awaiter(this, void 0, void 0, function () {
+            var result;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("customer_bank_accounts/" + id + GoCardlessApi_1.urlParams(params))];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.api.request("customer_bank_accounts/" + id + GoCardlessApi_1.urlParams(params))];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("customer_bank_accounts");
+                        return [2 /*return*/, __assign({}, result.customer_bank_accounts, { customer_bank_accounts: result })];
+                }
             });
         });
     };
     GoCardlessBankAccountApi.prototype.disable = function (id) {
         return __awaiter(this, void 0, void 0, function () {
+            var result;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("customer_bank_accounts/" + id + "/actions/disable", "POST")];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.api.request("customer_bank_accounts/" + id + "/actions/disable", "POST")];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("customer_bank_accounts");
+                        return [2 /*return*/, __assign({}, result.customer_bank_accounts, { customer_bank_accounts: result })];
+                }
             });
         });
     };

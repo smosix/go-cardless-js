@@ -4,13 +4,14 @@ export interface IGoCardlessCustomer {
     email: string;
     firstName: string;
     lastName: string;
-    phone: string;
-    addressLine1: string;
-    addressLine2: string;
-    addressLine3: string;
-    city: string;
-    country: string;
-    postcode: string;
+    phone?: string;
+    phoneNumber?: string;
+    addressLine1?: string;
+    addressLine2?: string;
+    addressLine3?: string;
+    city?: string;
+    country?: string;
+    postcode?: string;
     metaData?: {
         [key: string]: string | number;
     };
@@ -51,16 +52,10 @@ export declare class GoCardlessCustomerApi {
     index(params?: IndexRequestParams | {
         [key: string]: string | number | undefined;
     }): Promise<IGoCardlessIndexResponse>;
-    create(customer: IGoCardlessCustomer): Promise<{
-        customers: IGoCardlessApiCustomer;
-    }>;
-    update(id: string, customer: IGoCardlessCustomer): Promise<{
-        customers: IGoCardlessApiCustomer;
-    }>;
+    create(customer: IGoCardlessCustomer): Promise<IGoCardlessApiCustomer>;
+    update(id: string, customer: Partial<IGoCardlessCustomer>): Promise<IGoCardlessApiCustomer>;
     find(id: string, params?: {
         [key: string]: string | number | undefined;
-    }): Promise<{
-        customers: IGoCardlessApiCustomer;
-    }>;
+    }): Promise<IGoCardlessApiCustomer>;
 }
 export {};

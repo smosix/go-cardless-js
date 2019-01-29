@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -36,6 +47,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var GoCardlessApi_1 = require("./GoCardlessApi");
+var utils_1 = require("./utils");
 var GoCardlessPaymentApi = /** @class */ (function () {
     function GoCardlessPaymentApi(api) {
         this.api = api;
@@ -49,55 +61,90 @@ var GoCardlessPaymentApi = /** @class */ (function () {
     };
     GoCardlessPaymentApi.prototype.create = function (payment) {
         return __awaiter(this, void 0, void 0, function () {
-            var amount, currency, charge_date, reference, metadata, mandateId;
+            var amount, currency, charge_date, reference, metadata, mandateId, result;
             return __generator(this, function (_a) {
-                amount = payment.amount, currency = payment.currency, charge_date = payment.charge_date, reference = payment.reference, metadata = payment.metadata, mandateId = payment.mandateId;
-                return [2 /*return*/, this.api.request("payments", "POST", {
-                        payments: {
-                            amount: amount,
-                            currency: currency,
-                            charge_date: charge_date,
-                            // reference,
-                            metadata: metadata,
-                            links: {
-                                mandate: mandateId
-                            }
-                        }
-                    })];
+                switch (_a.label) {
+                    case 0:
+                        amount = payment.amount, currency = payment.currency, charge_date = payment.charge_date, reference = payment.reference, metadata = payment.metadata, mandateId = payment.mandateId;
+                        return [4 /*yield*/, this.api.request("payments", "POST", {
+                                payments: {
+                                    amount: amount,
+                                    currency: currency,
+                                    charge_date: charge_date,
+                                    // reference,
+                                    metadata: metadata,
+                                    links: {
+                                        mandate: mandateId
+                                    }
+                                }
+                            })];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("payments");
+                        return [2 /*return*/, __assign({}, result.payments, { payments: result })];
+                }
             });
         });
     };
     GoCardlessPaymentApi.prototype.update = function (id, payment) {
         return __awaiter(this, void 0, void 0, function () {
-            var metadata;
+            var metadata, result;
             return __generator(this, function (_a) {
-                metadata = payment.metadata;
-                return [2 /*return*/, this.api.request("payments/" + id, "PUT", {
-                        payments: {
-                            metadata: metadata
-                        }
-                    })];
+                switch (_a.label) {
+                    case 0:
+                        metadata = payment.metadata;
+                        return [4 /*yield*/, this.api.request("payments/" + id, "PUT", {
+                                payments: {
+                                    metadata: metadata
+                                }
+                            })];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("mandates");
+                        return [2 /*return*/, __assign({}, result.payments, { payments: result })];
+                }
             });
         });
     };
     GoCardlessPaymentApi.prototype.find = function (id, params) {
         return __awaiter(this, void 0, void 0, function () {
+            var result;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("payments/" + id + GoCardlessApi_1.urlParams(params))];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.api.request("payments/" + id + GoCardlessApi_1.urlParams(params))];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("payments");
+                        return [2 /*return*/, __assign({}, result.payments, { payments: result })];
+                }
             });
         });
     };
     GoCardlessPaymentApi.prototype.cancel = function (id, data) {
         return __awaiter(this, void 0, void 0, function () {
+            var result;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("payments/" + id + "/actions/cancel", "POST", data)];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.api.request("payments/" + id + "/actions/cancel", "POST", data)];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("payments");
+                        return [2 /*return*/, __assign({}, result.payments, { payments: result })];
+                }
             });
         });
     };
     GoCardlessPaymentApi.prototype.retry = function (id, data) {
         return __awaiter(this, void 0, void 0, function () {
+            var result;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("payments/" + id + "/actions/retry", "POST", data)];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.api.request("payments/" + id + "/actions/retry", "POST", data)];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("payments");
+                        return [2 /*return*/, __assign({}, result.payments, { payments: result })];
+                }
             });
         });
     };

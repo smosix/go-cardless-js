@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -36,6 +47,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var GoCardlessApi_1 = require("./GoCardlessApi");
+var utils_1 = require("./utils");
 var GoCardlessCustomerApi = /** @class */ (function () {
     function GoCardlessCustomerApi(api) {
         this.api = api;
@@ -49,54 +61,78 @@ var GoCardlessCustomerApi = /** @class */ (function () {
     };
     GoCardlessCustomerApi.prototype.create = function (customer) {
         return __awaiter(this, void 0, void 0, function () {
-            var email, firstName, lastName, addressLine1, addressLine2, addressLine3, city, postcode, metaData, phone;
+            var email, firstName, lastName, addressLine1, addressLine2, addressLine3, city, postcode, metaData, phone, phoneNumber, result;
             return __generator(this, function (_a) {
-                email = customer.email, firstName = customer.firstName, lastName = customer.lastName, addressLine1 = customer.addressLine1, addressLine2 = customer.addressLine2, addressLine3 = customer.addressLine3, city = customer.city, postcode = customer.postcode, metaData = customer.metaData, phone = customer.phone;
-                return [2 /*return*/, this.api.request("customers", "POST", {
-                        customers: {
-                            email: email,
-                            given_name: firstName,
-                            family_name: lastName,
-                            address_line1: addressLine1,
-                            address_line2: addressLine2,
-                            address_line3: addressLine3,
-                            city: city,
-                            postal_code: postcode,
-                            country_code: "GB",
-                            metadata: metaData,
-                            phone_number: phone
-                        }
-                    })];
+                switch (_a.label) {
+                    case 0:
+                        debugger;
+                        email = customer.email, firstName = customer.firstName, lastName = customer.lastName, addressLine1 = customer.addressLine1, addressLine2 = customer.addressLine2, addressLine3 = customer.addressLine3, city = customer.city, postcode = customer.postcode, metaData = customer.metaData, phone = customer.phone, phoneNumber = customer.phoneNumber;
+                        utils_1.attributeDeprecationWarning(phone, "phone", "phoneNumber");
+                        return [4 /*yield*/, this.api.request("customers", "POST", {
+                                customers: {
+                                    email: email,
+                                    given_name: firstName,
+                                    family_name: lastName,
+                                    address_line1: addressLine1,
+                                    address_line2: addressLine2,
+                                    address_line3: addressLine3,
+                                    city: city,
+                                    postal_code: postcode,
+                                    country_code: "GB",
+                                    metadata: metaData,
+                                    phone_number: phoneNumber || phone
+                                }
+                            })];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("customers");
+                        return [2 /*return*/, __assign({}, result, { customers: result })];
+                }
             });
         });
     };
     GoCardlessCustomerApi.prototype.update = function (id, customer) {
         return __awaiter(this, void 0, void 0, function () {
-            var email, firstName, lastName, addressLine1, addressLine2, addressLine3, city, postcode, metaData, phone;
+            var email, firstName, lastName, addressLine1, addressLine2, addressLine3, city, postcode, metaData, phone, phoneNumber, result;
             return __generator(this, function (_a) {
-                email = customer.email, firstName = customer.firstName, lastName = customer.lastName, addressLine1 = customer.addressLine1, addressLine2 = customer.addressLine2, addressLine3 = customer.addressLine3, city = customer.city, postcode = customer.postcode, metaData = customer.metaData, phone = customer.phone;
-                return [2 /*return*/, this.api.request("customers" + ("/" + id), "PUT", {
-                        customers: {
-                            email: email,
-                            given_name: firstName,
-                            family_name: lastName,
-                            address_line1: addressLine1,
-                            address_line2: addressLine2,
-                            address_line3: addressLine3,
-                            city: city,
-                            postal_code: postcode,
-                            country_code: "GB",
-                            metadata: metaData,
-                            phone_number: phone
-                        }
-                    })];
+                switch (_a.label) {
+                    case 0:
+                        email = customer.email, firstName = customer.firstName, lastName = customer.lastName, addressLine1 = customer.addressLine1, addressLine2 = customer.addressLine2, addressLine3 = customer.addressLine3, city = customer.city, postcode = customer.postcode, metaData = customer.metaData, phone = customer.phone, phoneNumber = customer.phoneNumber;
+                        utils_1.attributeDeprecationWarning(phone, "phone", "phoneNumber");
+                        return [4 /*yield*/, this.api.request("customers" + ("/" + id), "PUT", {
+                                customers: {
+                                    email: email,
+                                    given_name: firstName,
+                                    family_name: lastName,
+                                    address_line1: addressLine1,
+                                    address_line2: addressLine2,
+                                    address_line3: addressLine3,
+                                    city: city,
+                                    postal_code: postcode,
+                                    country_code: "GB",
+                                    metadata: metaData,
+                                    phone_number: phoneNumber || phone
+                                }
+                            })];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("customers");
+                        return [2 /*return*/, __assign({}, result.customers, { customers: result })];
+                }
             });
         });
     };
     GoCardlessCustomerApi.prototype.find = function (id, params) {
         return __awaiter(this, void 0, void 0, function () {
+            var result;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("customers" + ("/" + id + GoCardlessApi_1.urlParams(params)))];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.api.request("customers" + ("/" + id + GoCardlessApi_1.urlParams(params)))];
+                    case 1:
+                        result = _a.sent();
+                        utils_1.responseDeprecationWarning("customers");
+                        return [2 /*return*/, __assign({}, result.customers, { customers: result })];
+                }
             });
         });
     };

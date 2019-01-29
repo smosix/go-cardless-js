@@ -39,28 +39,18 @@ export declare class GoCardlessPaymentApi {
     index(params?: IndexRequestParams | {
         [key: string]: string | number | undefined;
     }): Promise<IGoCardlessIndexResponse>;
-    create(payment: IGoCardlessPayment): Promise<{
-        payments: IGoCardlessApiPayment;
-    }>;
+    create(payment: IGoCardlessPayment): Promise<IGoCardlessApiPayment>;
     update(id: string, payment: {
         metadata: Object;
-    }): Promise<{
-        payments: IGoCardlessApiPayment;
-    }>;
+    }): Promise<IGoCardlessApiPayment>;
     find(id: string, params?: {
         [key: string]: string | number | undefined;
-    }): Promise<{
-        payments: IGoCardlessApiPayment;
-    }>;
+    }): Promise<IGoCardlessApiPayment>;
     cancel(id: string, data?: {
         metadata: Object;
-    }): Promise<{
-        payments: IGoCardlessApiPayment;
-    }>;
+    }): Promise<IGoCardlessApiPayment>;
     retry(id: string, data?: {
         metadata: Object;
-    }): Promise<{
-        payments: IGoCardlessApiPayment;
-    }>;
+    }): Promise<IGoCardlessApiPayment>;
 }
 export {};

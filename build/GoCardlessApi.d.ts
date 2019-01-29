@@ -4,6 +4,7 @@ import { GoCardlessMandateApi } from "./GoCardlessMandateApi";
 import { GoCardlessPaymentApi } from "./GoCardlessPaymentApi";
 import { GoCardlessPayoutApi } from "./GoCardlessPayoutApi";
 import { GoCardlessPlanApi } from "./GoCardlessPlanApi";
+import { GoCardlessSubscriptionApi } from "./GoCardlessSubscriptionApi";
 import { GoCardlessRedirectFlowApi } from "./GoCardlessRedirectFlowApi";
 export declare type GoCardlessResponse = string | undefined;
 export declare const goCardlessTestUrl = "https://api-sandbox.gocardless.com/";
@@ -34,6 +35,7 @@ export declare class GoCardlessApi {
     payment: GoCardlessPaymentApi;
     payout: GoCardlessPayoutApi;
     plan: GoCardlessPlanApi;
+    subscription: GoCardlessSubscriptionApi;
     redirectFlows: GoCardlessRedirectFlowApi;
     constructor(accessToken: string, sandbox?: boolean);
     loadApis(): void;

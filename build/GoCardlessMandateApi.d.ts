@@ -1,6 +1,6 @@
 import { GoCardlessApi, IndexRequestParams } from "./GoCardlessApi";
 export interface IGoCardlessMandate {
-    scheme?: string;
+    scheme: "autogiro" | "bacs" | "becs" | "becs_nz" | "betalingsservice" | "sepa_core" | "pad";
     metadata?: Object;
     customer_bank_account: string;
     creditor?: string;
@@ -35,18 +35,12 @@ export declare class GoCardlessMandateApi {
     index(params?: IndexRequestParams | {
         [key: string]: string | number | undefined;
     }): Promise<IGoCardlessIndexResponse>;
-    create(mandate: IGoCardlessMandate): Promise<{
-        mandates: IGoCardlessApiMandate;
-    }>;
+    create(mandate: IGoCardlessMandate): Promise<IGoCardlessApiMandate>;
     update(id: string, mandate: {
         metadata: Object;
-    }): Promise<{
-        mandates: IGoCardlessApiMandate;
-    }>;
+    }): Promise<IGoCardlessApiMandate>;
     find(id: string, params?: {
         [key: string]: string | number | undefined;
-    }): Promise<{
-        mandates: IGoCardlessApiMandate;
-    }>;
+    }): Promise<IGoCardlessApiMandate>;
 }
 export {};
