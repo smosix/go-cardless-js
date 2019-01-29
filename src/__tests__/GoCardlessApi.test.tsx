@@ -1,6 +1,5 @@
-import { GoCardlessApi } from "../GoCardlessApi";
-import dotenv from "dot-env";
-dotenv.config();
+import { GoCardlessApi } from "../GoCardlessApi"
+import { GOCARDLESSS_SANDBOX_TEST_KEY } from "../../env"
 
 const apis = [
   { name: "customer", actions: ["create"] },
@@ -10,31 +9,29 @@ const apis = [
   { name: "payout", actions: [] },
   { name: "plan", actions: [] },
   { name: "subscription", actions: [] },
-  { name: "redirectFlows", actions: [] }
-];
+  { name: "redirectFlows", actions: [] },
+]
 
 function behavesLikeApi(api, apiInfo) {
   test(`${apiInfo.name} is defined`, () => {
-    expect(api).toBeTruthy();
-  });
+    expect(api).toBeTruthy()
+  })
 
   apiInfo.actions.map(action => {
     test(`${apiInfo.name} ${action} is defined`, () => {
-      expect(api[action]).toBeDefined();
-    });
+      expect(api[action]).toBeDefined()
+    })
     test(`${apiInfo.name} ${action} to throw go cardless error`, async () => {
-      expect(api[action]({})).rejects.toThrowError();
-    });
-  });
+      expect(api[action]({})).rejects.toThrowError()
+    })
+  })
 }
 
 function goCardlessApiTest() {
-  const goCardlessApi = new GoCardlessApi(
-    process.env.GOCARDLESSS_SANDBOX_TEST_KEY
-  );
+  const goCardlessApi = new GoCardlessApi(GOCARDLESSS_SANDBOX_TEST_KEY)
   test("generateSessionToken returns a string token", () => {
-    expect(typeof goCardlessApi.generateSessionToken() === "string").toBe(true);
-  });
+    expect(typeof goCardlessApi.generateSessionToken() === "string").toBe(true)
+  })
   test("Headers are correct", () => {
     expect(goCardlessApi.getHeaders()).toMatchObject({
       environment: expect.any(String),
@@ -42,13 +39,13 @@ function goCardlessApiTest() {
       Accept: "application/json",
       "GoCardless-Version": expect.any(String),
       Authorization: expect.stringMatching(new RegExp(/Bearer .*/)),
-      session_token: expect.any(String)
-    });
-  });
+      session_token: expect.any(String),
+    })
+  })
 
   apis.map(api => {
-    behavesLikeApi(goCardlessApi[api.name], api);
-  });
+    behavesLikeApi(goCardlessApi[api.name], api)
+  })
 }
 
-goCardlessApiTest();
+goCardlessApiTest()
