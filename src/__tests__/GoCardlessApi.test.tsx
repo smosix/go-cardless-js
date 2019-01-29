@@ -1,6 +1,5 @@
 import { GoCardlessApi } from "../GoCardlessApi"
-import { GOCARDLESSS_SANDBOX_TEST_KEY } from "../../env"
-
+require("dotenv").config()
 const apis = [
   { name: "customer", actions: ["create"] },
   { name: "bankAccount", actions: [] },
@@ -28,7 +27,9 @@ function behavesLikeApi(api, apiInfo) {
 }
 
 export function goCardlessBaseTests(callback?: any) {
-  const goCardlessApi = new GoCardlessApi(GOCARDLESSS_SANDBOX_TEST_KEY)
+  const goCardlessApi = new GoCardlessApi(
+    process.env.GOCARDLESSS_SANDBOX_TEST_KEY
+  )
   test("generateSessionToken returns a string token", () => {
     expect(typeof goCardlessApi.generateSessionToken() === "string").toBe(true)
   })
