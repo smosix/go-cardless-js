@@ -29,8 +29,11 @@ goCardlessApi.generateSessionToken(): string
 
 ### Testing!
 
-add to your .env the key
+add a .env with the key format below to run the testing
+
 GOCARDLESSS_SANDBOX_TEST_KEY= 'your sandbox go cardless token'
+
+I suggest avoiding using your live account for this as it WILL create a lot of dummy records.
 
 ### Apis:
 
