@@ -27,7 +27,7 @@ function behavesLikeApi(api, apiInfo) {
   })
 }
 
-function goCardlessApiTest() {
+export function goCardlessBaseTests(callback?: any) {
   const goCardlessApi = new GoCardlessApi(GOCARDLESSS_SANDBOX_TEST_KEY)
   test("generateSessionToken returns a string token", () => {
     expect(typeof goCardlessApi.generateSessionToken() === "string").toBe(true)
@@ -42,10 +42,13 @@ function goCardlessApiTest() {
       session_token: expect.any(String),
     })
   })
+  callback && callback(goCardlessApi)
+}
 
+export function goCardlessApiTest(goCardlessApi) {
   apis.map(api => {
     behavesLikeApi(goCardlessApi[api.name], api)
   })
 }
 
-goCardlessApiTest()
+goCardlessBaseTests(goCardlessApiTest)
