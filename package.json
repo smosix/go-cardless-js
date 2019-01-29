@@ -22,6 +22,7 @@
     "@types/jest": "^23.3.12",
     "babel-core": "^6.26.3",
     "babel-jest": "^23.6.0",
+    "dot-env": "^0.0.1",
     "jest-config": "^24.0.0",
     "jest-html-reporter": "^2.4.3",
     "ts-jest": "^23.10.5",
