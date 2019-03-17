@@ -12,7 +12,7 @@ import { GoCardlessRedirectFlowApi } from "./GoCardlessRedirectFlowApi";
 export type GoCardlessResponse = string | undefined;
 // docs = https://developer.gocardless.com/api-reference/#api-usage-making-requests
 export const goCardlessTestUrl = "https://api-sandbox.gocardless.com/";
-export const goCardlessLiveUrl = "https://api.gocardless.com";
+export const goCardlessLiveUrl = "https://api.gocardless.com/";
 export type IGoCardlessHeaders = {
   environment: "sandbox" | "live";
   "Content-Type": "application/json";
