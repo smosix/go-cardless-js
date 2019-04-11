@@ -284,6 +284,15 @@ goCardlessApi.mandates.update(id: string, {
   }>
 ```
 
+##### cancel
+```javascript
+goCardlessApi.mandates.cancel(id: string, {
+    metadata?: Object
+  }): Promise<{
+    mandates: IGoCardlessApiMandate
+  }>
+```
+
 ##### find
 
 ```javascript
