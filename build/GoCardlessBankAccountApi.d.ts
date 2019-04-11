@@ -51,7 +51,7 @@ export declare class GoCardlessBankAccountApi {
     create(bank: IGoCardlessBank): Promise<{
         customer_bank_accounts: IGoCardlessApiBank;
     }>;
-    update(id: string, bank: IGoCardlessBankUpdate): Promise<{
+    update(id: string, data?: IGoCardlessBankUpdate): Promise<{
         customer_bank_accounts: IGoCardlessApiBank;
     }>;
     find(id: string, params?: {

@@ -68,13 +68,11 @@ var GoCardlessBankAccountApi = /** @class */ (function () {
             });
         });
     };
-    GoCardlessBankAccountApi.prototype.update = function (id, bank) {
+    GoCardlessBankAccountApi.prototype.update = function (id, data) {
         return __awaiter(this, void 0, void 0, function () {
-            var metadata;
             return __generator(this, function (_a) {
-                metadata = bank.metadata;
                 return [2 /*return*/, this.api.request("customer_bank_accounts/" + id, "PUT", {
-                        customer_bank_accounts: { metadata: metadata }
+                        customer_bank_accounts: data
                     })];
             });
         });

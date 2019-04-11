@@ -1,6 +1,6 @@
 import { GoCardlessApi, IndexRequestParams } from "./GoCardlessApi";
 export interface IGoCardlessMandate {
-    scheme?: string;
+    scheme: "autogiro" | "bacs" | "becs" | "becs_nz" | "betalingsservice" | "sepa_core" | "pad";
     metadata?: Object;
     customer_bank_account: string;
     creditor?: string;
