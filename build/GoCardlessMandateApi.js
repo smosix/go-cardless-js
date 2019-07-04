@@ -78,6 +78,13 @@ var GoCardlessMandateApi = /** @class */ (function () {
             });
         });
     };
+    GoCardlessMandateApi.prototype.cancel = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.api.request("mandates/" + id + "/actions/cancel", "POST", { "data": { "metadata": {} } })];
+            });
+        });
+    };
     GoCardlessMandateApi.prototype.find = function (id, params) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {

@@ -36,68 +36,48 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var GoCardlessApi_1 = require("./GoCardlessApi");
-var GoCardlessBankAccountApi = /** @class */ (function () {
-    function GoCardlessBankAccountApi(api) {
+var GoCardlessRedirectFlowApi = /** @class */ (function () {
+    function GoCardlessRedirectFlowApi(api) {
         this.api = api;
     }
-    GoCardlessBankAccountApi.prototype.index = function (params) {
+    GoCardlessRedirectFlowApi.prototype.create = function (redirect_flows) {
         return __awaiter(this, void 0, void 0, function () {
+            var description, session_token, success_redirect_url, prefilled_customer, scheme, links;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("customer_bank_accounts" + GoCardlessApi_1.urlParams(params))];
-            });
-        });
-    };
-    GoCardlessBankAccountApi.prototype.create = function (bank) {
-        return __awaiter(this, void 0, void 0, function () {
-            var accountNumber, branchCode, accountHolderName, customerId, currency, metadata;
-            return __generator(this, function (_a) {
-                accountNumber = bank.accountNumber, branchCode = bank.branchCode, accountHolderName = bank.accountHolderName, customerId = bank.customerId, currency = bank.currency, metadata = bank.metadata;
-                return [2 /*return*/, this.api.request("customer_bank_accounts", "POST", {
-                        customer_bank_accounts: {
-                            account_number: accountNumber,
-                            branch_code: branchCode,
-                            account_holder_name: accountHolderName,
-                            country_code: "GB",
-                            currency: currency,
-                            metadata: metadata,
-                            links: {
-                                customer: customerId
-                            }
+                description = redirect_flows.description, session_token = redirect_flows.session_token, success_redirect_url = redirect_flows.success_redirect_url, prefilled_customer = redirect_flows.prefilled_customer, scheme = redirect_flows.scheme, links = redirect_flows.links;
+                return [2 /*return*/, this.api.request("redirect_flows", "POST", {
+                        redirect_flows: {
+                            description: description,
+                            session_token: session_token,
+                            success_redirect_url: success_redirect_url,
+                            prefilled_customer: prefilled_customer,
+                            scheme: scheme,
+                            links: links
                         }
                     })];
             });
         });
     };
-    GoCardlessBankAccountApi.prototype.update = function (id, data) {
+    GoCardlessRedirectFlowApi.prototype.complete = function (id, redirect_flows) {
         return __awaiter(this, void 0, void 0, function () {
+            var session_token;
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("customer_bank_accounts/" + id, "PUT", {
-                        customer_bank_accounts: data
+                session_token = redirect_flows.session_token;
+                return [2 /*return*/, this.api.request("redirect_flows/" + id + "/actions/complete", "POST", {
+                        data: {
+                            session_token: session_token
+                        }
                     })];
             });
         });
     };
-    GoCardlessBankAccountApi.prototype.find = function (id, params) {
+    GoCardlessRedirectFlowApi.prototype.find = function (id, params) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("customer_bank_accounts/" + id + GoCardlessApi_1.urlParams(params))];
+                return [2 /*return*/, this.api.request("redirect_flows/" + id + GoCardlessApi_1.urlParams(params))];
             });
         });
     };
-    GoCardlessBankAccountApi.prototype.disable = function (id) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("customer_bank_accounts/" + id + "/actions/disable", "POST")];
-            });
-        });
-    };
-    GoCardlessBankAccountApi.prototype.bankAccountForCustomerId = function (customerId) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.api.request("customer_bank_accounts?customer=" + customerId)];
-            });
-        });
-    };
-    return GoCardlessBankAccountApi;
+    return GoCardlessRedirectFlowApi;
 }());
-exports.GoCardlessBankAccountApi = GoCardlessBankAccountApi;
+exports.GoCardlessRedirectFlowApi = GoCardlessRedirectFlowApi;

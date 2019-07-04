@@ -49,7 +49,7 @@ var GoCardlessPlanApi_1 = require("./GoCardlessPlanApi");
 var GoCardlessRedirectFlowApi_1 = require("./GoCardlessRedirectFlowApi");
 // docs = https://developer.gocardless.com/api-reference/#api-usage-making-requests
 exports.goCardlessTestUrl = "https://api-sandbox.gocardless.com/";
-exports.goCardlessLiveUrl = "https://api.gocardless.com";
+exports.goCardlessLiveUrl = "https://api.gocardless.com/";
 function urlParams(params) {
     if (params === void 0) { params = {}; }
     return Object.keys(params)

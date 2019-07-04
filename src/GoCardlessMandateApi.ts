@@ -79,6 +79,12 @@ export class GoCardlessMandateApi {
     });
   }
 
+  async cancel(
+    id: string
+  ): Promise<{ mandates: IGoCardlessApiMandate }> {    
+    return this.api.request(`mandates/${id}/actions/cancel`, "POST", { "data": { "metadata": {} } } );
+  }
+
   async find(
     id: string,
     params?: { [key: string]: string | number | undefined }

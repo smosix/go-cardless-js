@@ -284,6 +284,15 @@ goCardlessApi.mandates.update(id: string, {
   }>
 ```
 
+##### cancel
+```javascript
+goCardlessApi.mandates.cancel(id: string, {
+    metadata?: Object
+  }): Promise<{
+    mandates: IGoCardlessApiMandate
+  }>
+```
+
 ##### find
 
 ```javascript
@@ -549,10 +558,25 @@ goCardlessApi.plan.cancel(id: string, data?: {
 
 ### Redirect Flows
 
-#### NOT YET PUBLISHED
-
 ```javascript
-goCardlessApi.redirectFlows
+goCardlessApi.redirectFlows.create({
+  "redirect_flows": {
+    "description": string
+    "session_token": string,
+    "success_redirect_url": string,
+    "prefilled_customer":  {
+      "given_name": string,
+      "family_name": string,
+      "email": string,
+      "address_line1": string,
+      "address_line2": string,
+      "postal_code": string,
+      "country_code": string,
+      "city": string,
+      "region": string
+    }
+  }
+})
 ```
 
 ### types

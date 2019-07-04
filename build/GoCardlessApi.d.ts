@@ -7,7 +7,7 @@ import { GoCardlessPlanApi } from "./GoCardlessPlanApi";
 import { GoCardlessRedirectFlowApi } from "./GoCardlessRedirectFlowApi";
 export declare type GoCardlessResponse = string | undefined;
 export declare const goCardlessTestUrl = "https://api-sandbox.gocardless.com/";
-export declare const goCardlessLiveUrl = "https://api.gocardless.com";
+export declare const goCardlessLiveUrl = "https://api.gocardless.com/";
 export declare type IGoCardlessHeaders = {
     environment: "sandbox" | "live";
     "Content-Type": "application/json";
@@ -39,7 +39,7 @@ export declare class GoCardlessApi {
     loadApis(): void;
     generateSessionToken(): string;
     getHeaders(): IGoCardlessHeaders;
-    getBaseUrl(): "https://api-sandbox.gocardless.com/" | "https://api.gocardless.com";
+    getBaseUrl(): "https://api-sandbox.gocardless.com/" | "https://api.gocardless.com/";
     request(path: string, method?: "GET" | "POST" | "PUT", data?: {
         [key: string]: any;
     }): Promise<any>;
